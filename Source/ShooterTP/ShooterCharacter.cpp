@@ -24,6 +24,7 @@ AShooterCharacter::AShooterCharacter()
 	CameraBoom->SetupAttachment(RootComponent);
 	CameraBoom->TargetArmLength = 300.f; // camera follows at this distance behind the character
 	CameraBoom->bUsePawnControlRotation = true; // rotate arm based on controller
+	CameraBoom->SocketOffset = FVector(0.f, -50.f, 50.f);
 
 	// Create a follow camera
 	FollowCamera = CreateDefaultSubobject<UCameraComponent>(TEXT("FollowCamera"));
@@ -31,7 +32,7 @@ AShooterCharacter::AShooterCharacter()
 	FollowCamera->bUsePawnControlRotation = false; // camera does not rotate relative to arm, the boom does
 
 	bUseControllerRotationPitch = false;
-	bUseControllerRotationYaw = false;
+	bUseControllerRotationYaw = true;
 	bUseControllerRotationRoll = false;
 
 	GetCharacterMovement()->bOrientRotationToMovement = true;
