@@ -120,16 +120,29 @@ void AShooterCharacter::FireWeapon()
 			const FVector Start = FVector(CrosshairWorldPos);
 			const FVector End = FVector(CrosshairWorldPos + CrosshairWorldDir * 50'000.f);
 
+			// First trace hit, check for objects between crosshair position on the screen to the end point
 			FVector BeamEndPoint = End;
 			GetWorld()->LineTraceSingleByChannel(ScreenTraceHit, Start, End, ECollisionChannel::ECC_Visibility);
 			if (ScreenTraceHit.bBlockingHit)
 			{
 				BeamEndPoint = ScreenTraceHit.Location;
+			}
+
+			// Second trace hit, check for objects between the gun barell and the beam end point from the first trace
+			FHitResult WeaponTraceHit;
+			const FVector WeaponTraceStart = FVector(SocketTransform.GetLocation());
+			const FVector WeaponTraceEnd = BeamEndPoint;
+			GetWorld()->LineTraceSingleByChannel(WeaponTraceHit, WeaponTraceStart, WeaponTraceEnd, ECollisionChannel::ECC_Visibility);
+			if (WeaponTraceHit.bBlockingHit) // Object between barell and beam end point
+			{
+				BeamEndPoint = WeaponTraceHit.Location;
 				if (ImpactParticles)
 				{
-					UGameplayStatics::SpawnEmitterAtLocation(GetWorld(), ImpactParticles, ScreenTraceHit.Location);
+					// Spawn impact particles after updating beam end point
+					UGameplayStatics::SpawnEmitterAtLocation(GetWorld(), ImpactParticles, BeamEndPoint);
 				}
 			}
+
 			if (BeamParticles)
 			{
 				UParticleSystemComponent* Beam = UGameplayStatics::SpawnEmitterAtLocation(GetWorld(), BeamParticles, SocketTransform);
