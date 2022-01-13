@@ -46,7 +46,10 @@ AShooterCharacter::AShooterCharacter()
 void AShooterCharacter::BeginPlay()
 {
 	Super::BeginPlay();
-	
+	if (FollowCamera)
+	{
+		CameraDefaultFOV = FollowCamera->FieldOfView;
+	}
 }
 
 void AShooterCharacter::MoveForward(float Value)
