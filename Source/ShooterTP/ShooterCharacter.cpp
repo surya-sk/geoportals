@@ -17,6 +17,8 @@ AShooterCharacter::AShooterCharacter()
 	BaseTurnRate = 45.f;
 	BaseLookUpRate = 45.f;
 	bAiming = false;
+	CameraDefaultFOV = 0.f;
+	CameraZoomedFOV = 60.f;
  	// Set this character to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
 
@@ -175,11 +177,13 @@ bool AShooterCharacter::GetBeamEndLocation(const FVector& MuzzleSocketLocation, 
 void AShooterCharacter::AimingButtonPressed()
 {
 	bAiming = true;
+	FollowCamera->SetFieldOfView(CameraZoomedFOV);
 }
 
 void AShooterCharacter::AimingButtonReleased()
 {
 	bAiming = false;
+	FollowCamera->SetFieldOfView(CameraDefaultFOV);
 }
 
 // Called every frame

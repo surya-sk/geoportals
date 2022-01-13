@@ -76,6 +76,9 @@ private:
 	// Default camera FOV value
 	float CameraDefaultFOV;
 
+	// Camera zoomed FOV value
+	float CameraZoomedFOV;
+
 public:
 
 	FORCEINLINE USpringArmComponent* GetCameraBoom() const { return CameraBoom; }
