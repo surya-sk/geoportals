@@ -17,10 +17,17 @@ AShooterCharacter::AShooterCharacter()
 	BaseTurnRate = 45.f;
 	BaseLookUpRate = 45.f;
 	bAiming = false;
+
 	CameraDefaultFOV = 0.f;
 	CameraZoomedFOV = 60.f;
-	ZoomInterpSpeed = 20.f;
 	CameraCurrentFOV = 0.f;
+	ZoomInterpSpeed = 20.f;
+
+	NormalTurnRate = 90.f;
+	NormalLookUpRate = 90.f;
+	AimingTurnRate = 20.f;
+	AimingLookUpRate = 20.f;
+
  	// Set this character to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
 
@@ -193,6 +200,25 @@ void AShooterCharacter::Tick(float DeltaTime)
 	Super::Tick(DeltaTime);
 
 	SetCameraFOV(DeltaTime);
+
+	SetLookRates();
+}
+
+/// <summary>
+/// Change look sensitvity based on aiming state
+/// </summary>
+void AShooterCharacter::SetLookRates()
+{
+	if (bAiming)
+	{
+		BaseTurnRate = AimingTurnRate;
+		BaseLookUpRate = AimingLookUpRate;
+	}
+	else
+	{
+		BaseTurnRate = NormalTurnRate;
+		BaseLookUpRate = NormalTurnRate;
+	}
 }
 
 void AShooterCharacter::SetCameraFOV(float DeltaTime)
