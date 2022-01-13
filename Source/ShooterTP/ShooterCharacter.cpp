@@ -192,6 +192,11 @@ void AShooterCharacter::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 
+	SetCameraFOV(DeltaTime);
+}
+
+void AShooterCharacter::SetCameraFOV(float DeltaTime)
+{
 	if (bAiming)
 	{
 		CameraCurrentFOV = FMath::FInterpTo(CameraCurrentFOV, CameraZoomedFOV, DeltaTime, ZoomInterpSpeed);
