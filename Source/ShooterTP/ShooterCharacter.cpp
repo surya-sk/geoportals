@@ -19,6 +19,8 @@ AShooterCharacter::AShooterCharacter()
 	bAiming = false;
 	CameraDefaultFOV = 0.f;
 	CameraZoomedFOV = 60.f;
+	ZoomInterpSpeed = 20.f;
+	CameraCurrentFOV = 0.f;
  	// Set this character to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
 
@@ -51,6 +53,7 @@ void AShooterCharacter::BeginPlay()
 	if (FollowCamera)
 	{
 		CameraDefaultFOV = FollowCamera->FieldOfView;
+		CameraCurrentFOV = CameraDefaultFOV;
 	}
 }
 
@@ -177,13 +180,11 @@ bool AShooterCharacter::GetBeamEndLocation(const FVector& MuzzleSocketLocation, 
 void AShooterCharacter::AimingButtonPressed()
 {
 	bAiming = true;
-	FollowCamera->SetFieldOfView(CameraZoomedFOV);
 }
 
 void AShooterCharacter::AimingButtonReleased()
 {
 	bAiming = false;
-	FollowCamera->SetFieldOfView(CameraDefaultFOV);
 }
 
 // Called every frame
@@ -191,6 +192,15 @@ void AShooterCharacter::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 
+	if (bAiming)
+	{
+		CameraCurrentFOV = FMath::FInterpTo(CameraCurrentFOV, CameraZoomedFOV, DeltaTime, ZoomInterpSpeed);
+	}
+	else
+	{
+		CameraCurrentFOV = FMath::FInterpTo(CameraCurrentFOV, CameraDefaultFOV, DeltaTime, ZoomInterpSpeed);
+	}
+	FollowCamera->SetFieldOfView(CameraCurrentFOV);
 }
 
 // Called to bind functionality to input
