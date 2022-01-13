@@ -25,9 +25,9 @@ AShooterCharacter::AShooterCharacter()
 	// Create a camera boom (pull in towards the character if there is collision)
 	CameraBoom = CreateDefaultSubobject<USpringArmComponent>(TEXT("CameraBoom"));
 	CameraBoom->SetupAttachment(RootComponent);
-	CameraBoom->TargetArmLength = 300.f; // camera follows at this distance behind the character
+	CameraBoom->TargetArmLength = 180.f; // camera follows at this distance behind the character
 	CameraBoom->bUsePawnControlRotation = true; // rotate arm based on controller
-	CameraBoom->SocketOffset = FVector(0.f, -50.f, 50.f);
+	CameraBoom->SocketOffset = FVector(0.f, -50.f, 70.f);
 
 	// Create a follow camera
 	FollowCamera = CreateDefaultSubobject<UCameraComponent>(TEXT("FollowCamera"));
