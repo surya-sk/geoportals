@@ -47,6 +47,11 @@ protected:
 
 	void FireButtonReleased();
 
+	void StartFireTimer();
+
+	UFUNCTION()
+	void AutoFireReset();
+
 public:	
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
