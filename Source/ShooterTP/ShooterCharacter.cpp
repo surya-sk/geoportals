@@ -32,7 +32,7 @@ AShooterCharacter::AShooterCharacter()
 	MouseAimingTurnRate = 0.2f;
 	MouseAimingLookUpRate = 0.2f;
 
-	AutomaticFireFrequency = 0.1f;
+	AutomaticFireFrequency = 0.3f;
 	bShouldFire = true;
 	bFireButtonPressed = false;
 
