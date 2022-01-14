@@ -253,6 +253,16 @@ void AShooterCharacter::SetLookRates()
 	}
 }
 
+void AShooterCharacter::FireButtonPressed()
+{
+	bFireButtonPressed = true;
+}
+
+void AShooterCharacter::FireButtonReleased()
+{
+	bFireButtonPressed = false;
+}
+
 void AShooterCharacter::SetCameraFOV(float DeltaTime)
 {
 	if (bAiming)

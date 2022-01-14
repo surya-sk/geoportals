@@ -43,6 +43,10 @@ protected:
 
 	void SetLookRates();
 
+	void FireButtonPressed();
+
+	void FireButtonReleased();
+
 public:	
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
@@ -112,6 +116,14 @@ private:
 	// Interpolation speed for zooming when aiming
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Combat, meta = (AllowPrivateAccess = "true"))
 	float ZoomInterpSpeed;
+
+	bool bFireButtonPressed;
+	
+	bool bShouldFire;
+
+	float AutomaticFireFrequency;
+
+	FTimerHandle AutoFireTimer;
 
 public:
 
