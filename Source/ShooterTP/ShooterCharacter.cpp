@@ -33,6 +33,8 @@ AShooterCharacter::AShooterCharacter()
 	MouseAimingLookUpRate = 0.2f;
 
 	AutomaticFireFrequency = 0.1f;
+	bShouldFire = true;
+	bFireButtonPressed = false;
 
  	// Set this character to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
