@@ -2,12 +2,27 @@
 
 
 #include "Item.h"
+#include "Components/BoxComponent.h"
 
 // Sets default values
 AItem::AItem()
 {
  	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
+
+	ItemSkeletalMesh = CreateDefaultSubobject<USkeletalMeshComponent>(TEXT("ItemSkeletalMesh"));
+	ItemStaticMesh = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("ItemStaticMesh"));
+	if (ItemSkeletalMesh)
+	{
+		SetRootComponent(ItemSkeletalMesh);
+	}
+	else if (ItemStaticMesh)
+	{
+		SetRootComponent(ItemStaticMesh);
+	}
+	
+	CollisionBox = CreateDefaultSubobject<UBoxComponent>(TEXT("CollisionBox"));
+	CollisionBox->SetupAttachment(RootComponent);
 
 }
 
