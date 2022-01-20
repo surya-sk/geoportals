@@ -6,6 +6,15 @@
 #include "GameFramework/Character.h"
 #include "ShooterCharacter.generated.h"
 
+UENUM(BlueprintType)
+enum class EAmmoType : uint8
+{
+	EAT_9mm UMETA(DisplayName = "9mm"),
+	EAT_AR UMETA(DisplayName = "AssaultRifle"),
+
+	EAT_MAX UMETA(DisplayName = "DefaultMax")
+};
+
 UCLASS()
 class SHOOTERTP_API AShooterCharacter : public ACharacter
 {
@@ -51,6 +60,8 @@ protected:
 
 	UFUNCTION()
 	void AutoFireReset();
+
+	void InitAmmoMap();
 
 public:	
 	// Called every frame
@@ -129,6 +140,16 @@ private:
 	float AutomaticFireFrequency;
 
 	FTimerHandle AutoFireTimer;
+
+	// Keep track of different ammo types and their values
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Items, meta = (AllowPrivateAccess = "true"))
+	TMap<EAmmoType, int32> AmmoMap;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Items, meta = (AllowPrivateAccess = "true"))
+	int32 NineMMDefaultAmount;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Items, meta = (AllowPrivateAccess = "true"))
+	int32 ARDefaultAmount;
 
 public:
 

@@ -36,6 +36,8 @@ AShooterCharacter::AShooterCharacter()
 	bShouldFire = true;
 	bFireButtonPressed = false;
 
+	NineMMDefaultAmount = 85;
+	ARDefaultAmount = 120;
  	// Set this character to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
 
@@ -70,6 +72,7 @@ void AShooterCharacter::BeginPlay()
 		CameraDefaultFOV = FollowCamera->FieldOfView;
 		CameraCurrentFOV = CameraDefaultFOV;
 	}
+	InitAmmoMap();
 }
 
 void AShooterCharacter::MoveForward(float Value)
@@ -285,6 +288,12 @@ void AShooterCharacter::AutoFireReset()
 	{
 		StartFireTimer();
 	}
+}
+
+void AShooterCharacter::InitAmmoMap()
+{
+	AmmoMap.Add(EAmmoType::EAT_9mm, NineMMDefaultAmount);
+	AmmoMap.Add(EAmmoType::EAT_AR, ARDefaultAmount);
 }
 
 void AShooterCharacter::SetCameraFOV(float DeltaTime)
