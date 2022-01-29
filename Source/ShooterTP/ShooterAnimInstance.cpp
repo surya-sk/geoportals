@@ -6,6 +6,17 @@
 #include "GameFramework/CharacterMovementComponent.h"
 #include "Kismet/KismetMathLibrary.h"
 
+UShooterAnimInstance::UShooterAnimInstance()
+{
+	Speed = 0.f;
+	bIsInAir = false;
+	bIsAccerlerating = false;
+	MovementOffsetYaw = 0.f;
+	CharacterYaw = 0.f;
+	CharacterYawLastFrame = 0.f;
+	RootYawOffset = 0.f;
+}
+
 void UShooterAnimInstance::UpdateAnimationProperties(float DeltaTime)
 {
 	if (ShooterCharacter == nullptr)
@@ -27,10 +38,31 @@ void UShooterAnimInstance::UpdateAnimationProperties(float DeltaTime)
 		FRotator MovementRotation = UKismetMathLibrary::MakeRotFromX(ShooterCharacter->GetVelocity());
 		MovementOffsetYaw = UKismetMathLibrary::NormalizedDeltaRotator(MovementRotation, AimRotation).Yaw;
 	}
+	TurnInPlace();
 }
 
 void UShooterAnimInstance::NativeInitializeAnimation()
 {
 	ShooterCharacter = Cast<AShooterCharacter>(TryGetPawnOwner());
+}
+
+void UShooterAnimInstance::TurnInPlace()
+{
+	if (ShooterCharacter == nullptr)
+	{
+		return;
+	}
+	if (Speed > 0) // character not in place
+	{
+		
+	}
+	else
+	{
+		CharacterYawLastFrame = CharacterYaw;
+		CharacterYaw = ShooterCharacter->GetActorRotation().Yaw;
+		const float YawDelta = CharacterYaw - CharacterYawLastFrame;
+
+		RootYawOffset -= YawDelta;
+	}
 }
 

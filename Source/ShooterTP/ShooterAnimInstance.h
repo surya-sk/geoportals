@@ -15,11 +15,15 @@ class SHOOTERTP_API UShooterAnimInstance : public UAnimInstance
 	GENERATED_BODY()
 
 public:
+	UShooterAnimInstance();
 
 	UFUNCTION(BlueprintCallable)
 	void UpdateAnimationProperties(float DeltaTime);
 
 	virtual void NativeInitializeAnimation() override;
+
+protected:
+	void TurnInPlace();
 
 private:
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Movement, Meta = (AllowPrivateAccess = "true"))
@@ -38,4 +42,12 @@ private:
 	// Offset yaw used for strafing
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Movement, Meta = (AllowPrivateAccess = "true"))
 	float MovementOffsetYaw;
+
+	// current yaw of the character
+	float CharacterYaw;
+
+	float CharacterYawLastFrame;
+
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Turn In Place", Meta = (AllowPrivateAccess = "true"))
+	float RootYawOffset;
 };
