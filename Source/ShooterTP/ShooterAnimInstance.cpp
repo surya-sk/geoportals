@@ -25,6 +25,7 @@ void UShooterAnimInstance::UpdateAnimationProperties(float DeltaTime)
 	}
 	if (ShooterCharacter)
 	{
+		bCrouching = ShooterCharacter->GetCrouching();
 		// Get the lateral speed of the character from the velocity
 		FVector Velocity = ShooterCharacter->GetVelocity();
 		Velocity.Z = 0;

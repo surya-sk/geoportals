@@ -38,6 +38,9 @@ AShooterCharacter::AShooterCharacter()
 
 	NineMMDefaultAmount = 85;
 	ARDefaultAmount = 120;
+
+	bCrouching = false;
+
  	// Set this character to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
 
@@ -296,6 +299,14 @@ void AShooterCharacter::InitAmmoMap()
 	AmmoMap.Add(EAmmoType::EAT_AR, ARDefaultAmount);
 }
 
+void AShooterCharacter::CrouchButtonPressed()
+{
+	if (!GetCharacterMovement()->IsFalling())
+	{
+		bCrouching = !bCrouching;
+	}
+}
+
 void AShooterCharacter::SetCameraFOV(float DeltaTime)
 {
 	if (bAiming)
@@ -328,5 +339,6 @@ void AShooterCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputCo
 	PlayerInputComponent->BindAction("FireButton", EInputEvent::IE_Released, this, &AShooterCharacter::FireButtonReleased);
 	PlayerInputComponent->BindAction("AimButton", EInputEvent::IE_Pressed, this, &AShooterCharacter::AimingButtonPressed);
 	PlayerInputComponent->BindAction("AimButton", EInputEvent::IE_Released, this, &AShooterCharacter::AimingButtonReleased);
+	PlayerInputComponent->BindAction("Crouch", EInputEvent::IE_Pressed, this, &AShooterCharacter::CrouchButtonPressed);
 }
 

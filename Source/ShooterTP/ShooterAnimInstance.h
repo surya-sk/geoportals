@@ -50,4 +50,7 @@ private:
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Turn In Place", Meta = (AllowPrivateAccess = "true"))
 	float RootYawOffset;
+
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Crouching, Meta = (AllowPrivateAccess = "true"))
+	bool bCrouching;
 };
