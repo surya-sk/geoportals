@@ -53,6 +53,7 @@ void UShooterAnimInstance::TurnInPlace()
 	{
 		return;
 	}
+	Pitch = ShooterCharacter->GetBaseAimRotation().Pitch;
 	if (Speed > 0) // character not in place
 	{
 		
