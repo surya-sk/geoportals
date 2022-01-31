@@ -10,6 +10,7 @@
 #include "Engine/SkeletalMeshSocket.h"
 #include "DrawDebugHelpers.h"
 #include "Particles/ParticleSystemComponent.h"
+#include "Components/CapsuleComponent.h"
 
 // Sets default values
 AShooterCharacter::AShooterCharacter()
@@ -43,6 +44,9 @@ AShooterCharacter::AShooterCharacter()
 
 	BaseMovementSpeed = 650.f;
 	CrouchMovementSpeed = 300.f;
+
+	StandingCapsuleHalfHeight = 88.f;
+	CrouchingCapsuleHalfHeight = 44.f;
 
  	// Set this character to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
@@ -248,6 +252,8 @@ void AShooterCharacter::Tick(float DeltaTime)
 	SetCameraFOV(DeltaTime);
 
 	SetLookRates();
+	
+	InterpCapsuleHalfHeight(DeltaTime);
 }
 
 /// <summary>
@@ -330,6 +336,21 @@ void AShooterCharacter::Jump()
 	{
 		ACharacter::Jump();
 	}
+}
+
+void AShooterCharacter::InterpCapsuleHalfHeight(float DeltaTime)
+{
+	float TargetCapsuleHalfHeight;
+	if (bCrouching)
+	{
+		TargetCapsuleHalfHeight = CrouchingCapsuleHalfHeight;
+	}
+	else
+	{
+		TargetCapsuleHalfHeight = StandingCapsuleHalfHeight;
+	}
+	const float InterpHalfHeight = FMath::FInterpTo(GetCapsuleComponent()->GetScaledCapsuleHalfHeight(), TargetCapsuleHalfHeight, DeltaTime, 20.f);
+	GetCapsuleComponent()->SetCapsuleHalfHeight(InterpHalfHeight);
 }
 
 void AShooterCharacter::SetCameraFOV(float DeltaTime)
