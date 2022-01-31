@@ -52,7 +52,7 @@ AShooterCharacter::AShooterCharacter()
 	CameraBoom->SetupAttachment(RootComponent);
 	CameraBoom->TargetArmLength = 180.f; // camera follows at this distance behind the character
 	CameraBoom->bUsePawnControlRotation = true; // rotate arm based on controller
-	CameraBoom->SocketOffset = FVector(0.f, -50.f, 70.f);
+	CameraBoom->SocketOffset = FVector(0.f, -50.f, 40.f);
 
 	// Create a follow camera
 	FollowCamera = CreateDefaultSubobject<UCameraComponent>(TEXT("FollowCamera"));
