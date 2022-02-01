@@ -350,6 +350,11 @@ void AShooterCharacter::InterpCapsuleHalfHeight(float DeltaTime)
 		TargetCapsuleHalfHeight = StandingCapsuleHalfHeight;
 	}
 	const float InterpHalfHeight = FMath::FInterpTo(GetCapsuleComponent()->GetScaledCapsuleHalfHeight(), TargetCapsuleHalfHeight, DeltaTime, 20.f);
+
+	const float DeltaCapsuleHalfHeight = InterpHalfHeight - GetCapsuleComponent()->GetScaledCapsuleHalfHeight(); // Negative when crouching
+	const FVector MeshOffset = FVector(0.f, 0.f, -DeltaCapsuleHalfHeight);
+	GetMesh()->AddLocalOffset(MeshOffset);
+		;
 	GetCapsuleComponent()->SetCapsuleHalfHeight(InterpHalfHeight);
 }
 
