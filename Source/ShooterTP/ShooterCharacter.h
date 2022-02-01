@@ -126,9 +126,11 @@ private:
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Combat, meta = (AllowPrivateAccess = "true"))
 	bool bAiming;
 
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Camera, meta = (AllowPrivateAccess = "true"))
 	// Default camera FOV value
 	float CameraDefaultFOV;
 
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Camera, meta = (AllowPrivateAccess = "true"))
 	// Camera zoomed FOV value
 	float CameraZoomedFOV;
 
