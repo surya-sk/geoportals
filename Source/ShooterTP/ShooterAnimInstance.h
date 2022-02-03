@@ -57,4 +57,7 @@ private:
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Crouching, Meta = (AllowPrivateAccess = "true"))
 	bool bCrouching;
 
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Aim, Meta = (AllowPrivateAccess = "true"))
+	bool bAiming;
+
 };

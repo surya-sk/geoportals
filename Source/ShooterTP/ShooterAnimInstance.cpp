@@ -35,6 +35,8 @@ void UShooterAnimInstance::UpdateAnimationProperties(float DeltaTime)
 
 		bIsAccerlerating = ShooterCharacter->GetCharacterMovement()->GetCurrentAcceleration().Size() > 0.f;
 
+		bAiming = ShooterCharacter->GetAiming();
+
 		FRotator AimRotation = ShooterCharacter->GetBaseAimRotation();
 		FRotator MovementRotation = UKismetMathLibrary::MakeRotFromX(ShooterCharacter->GetVelocity());
 		MovementOffsetYaw = UKismetMathLibrary::NormalizedDeltaRotator(MovementRotation, AimRotation).Yaw;
