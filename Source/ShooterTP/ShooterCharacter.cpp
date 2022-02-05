@@ -11,6 +11,8 @@
 #include "DrawDebugHelpers.h"
 #include "Particles/ParticleSystemComponent.h"
 #include "Components/CapsuleComponent.h"
+#include "PhysicalMaterials/PhysicalMaterial.h"
+#include "ShooterTP.h"
 
 // Sets default values
 AShooterCharacter::AShooterCharacter()
@@ -367,7 +369,11 @@ void AShooterCharacter::Footstep()
 	QueryParams.bReturnPhysicalMaterial = true;
 
 	GetWorld()->LineTraceSingleByChannel(HitResult, Start, End, ECollisionChannel::ECC_Visibility, QueryParams);
-	UE_LOG(LogTemp, Warning, TEXT("Hit actor %s"), *HitResult.Actor->GetName());
+	auto HitSurface = HitResult.PhysMaterial->SurfaceType;
+	if (HitSurface == EPS_Grass)
+	{
+		UE_LOG(LogTemp, Warning, TEXT("Hit grass surface type"));
+	}
 }
 
 void AShooterCharacter::SetCameraFOV(float DeltaTime)
