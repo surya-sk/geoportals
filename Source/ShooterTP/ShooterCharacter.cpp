@@ -358,6 +358,18 @@ void AShooterCharacter::InterpCapsuleHalfHeight(float DeltaTime)
 	GetCapsuleComponent()->SetCapsuleHalfHeight(InterpHalfHeight);
 }
 
+void AShooterCharacter::Footstep()
+{
+	FHitResult HitResult;
+	const FVector Start = GetActorLocation();
+	const FVector End = Start + FVector(0, 0, -400.f);
+	FCollisionQueryParams QueryParams;
+	QueryParams.bReturnPhysicalMaterial = true;
+
+	GetWorld()->LineTraceSingleByChannel(HitResult, Start, End, ECollisionChannel::ECC_Visibility, QueryParams);
+	UE_LOG(LogTemp, Warning, TEXT("Hit actor %s"), *HitResult.Actor->GetName());
+}
+
 void AShooterCharacter::SetCameraFOV(float DeltaTime)
 {
 	if (bAiming)
