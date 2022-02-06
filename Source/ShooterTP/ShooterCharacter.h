@@ -69,6 +69,9 @@ protected:
 
 	void InterpCapsuleHalfHeight(float DeltaTime);
 
+	UFUNCTION(BlueprintCallable)
+	EPhysicalSurface GetSurfaceType();
+
 public:	
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
