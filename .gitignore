@@ -75,6 +75,9 @@ Saved/*
 Intermediate/*
 Plugins/*/Intermediate/*
 
+Content/KiteDemo/
+Content/ParagonProps/
+
 # Cache files for the editor to use
 DerivedDataCache/*
 
