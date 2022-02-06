@@ -70,7 +70,7 @@ protected:
 	void InterpCapsuleHalfHeight(float DeltaTime);
 
 	UFUNCTION(BlueprintCallable)
-	void Footstep();
+	EPhysicalSurface GetSurfaceType();
 
 public:	
 	// Called every frame

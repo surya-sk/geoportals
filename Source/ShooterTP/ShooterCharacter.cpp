@@ -360,7 +360,7 @@ void AShooterCharacter::InterpCapsuleHalfHeight(float DeltaTime)
 	GetCapsuleComponent()->SetCapsuleHalfHeight(InterpHalfHeight);
 }
 
-void AShooterCharacter::Footstep()
+EPhysicalSurface AShooterCharacter::GetSurfaceType()
 {
 	FHitResult HitResult;
 	const FVector Start = GetActorLocation();
@@ -369,11 +369,7 @@ void AShooterCharacter::Footstep()
 	QueryParams.bReturnPhysicalMaterial = true;
 
 	GetWorld()->LineTraceSingleByChannel(HitResult, Start, End, ECollisionChannel::ECC_Visibility, QueryParams);
-	auto HitSurface = HitResult.PhysMaterial->SurfaceType;
-	if (HitSurface == EPS_Grass)
-	{
-		UE_LOG(LogTemp, Warning, TEXT("Hit grass surface type"));
-	}
+	return UPhysicalMaterial::DetermineSurfaceType(HitResult.PhysMaterial.Get());
 }
 
 void AShooterCharacter::SetCameraFOV(float DeltaTime)
