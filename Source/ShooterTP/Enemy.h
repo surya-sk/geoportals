@@ -24,7 +24,7 @@ protected:
 	void ShowHealthBar();
 	void ShowHealthBar_Implementation();
 
-	UFUNCTION(BlueprintImplementable)
+	UFUNCTION(BlueprintImplementableEvent)
 	void HideHealthBar();
 
 private:
