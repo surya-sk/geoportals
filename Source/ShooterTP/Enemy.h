@@ -27,6 +27,8 @@ protected:
 	UFUNCTION(BlueprintImplementableEvent)
 	void HideHealthBar();
 
+	void Die();
+
 private:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Combat, meta = (AllowPrivateAccess = "true"))
 	class UParticleSystem* ImpactParticles;
