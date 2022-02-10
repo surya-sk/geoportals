@@ -29,6 +29,8 @@ protected:
 
 	void Die();
 
+	void PlayHitMontage(FName Section, float PlayRate = 1.0f);
+
 private:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Combat, meta = (AllowPrivateAccess = "true"))
 	class UParticleSystem* ImpactParticles;
@@ -49,6 +51,9 @@ private:
 	float HealthBarDisplayTime;
 
 	FTimerHandle HealthBarTimer;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Combat, meta = (AllowPrivateAccess = "true"))
+	UAnimMontage* HitMontage;
 
 public:	
 	// Called every frame
