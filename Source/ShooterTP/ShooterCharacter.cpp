@@ -188,7 +188,16 @@ void AShooterCharacter::FireWeapon()
 				AEnemy* HitEnemy = Cast<AEnemy>(BeamHitResult.Actor.Get());
 				if (HitEnemy)
 				{
-					UGameplayStatics::ApplyDamage(BeamHitResult.Actor.Get(), Damage, GetController(), this, UDamageType::StaticClass());
+					float DamageToInflict;
+					if (BeamHitResult.BoneName.ToString() == HitEnemy->GetHeadBone())
+					{
+						DamageToInflict = HeadshotDamage;
+					}
+					else
+					{
+						DamageToInflict = Damage;
+					}
+					UGameplayStatics::ApplyDamage(BeamHitResult.Actor.Get(), DamageToInflict, GetController(), this, UDamageType::StaticClass());
 				}
 			}
 			// Play default particles
