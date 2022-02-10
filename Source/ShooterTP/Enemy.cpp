@@ -9,6 +9,8 @@
 // Sets default values
 AEnemy::AEnemy()
 {
+	Health = 100.f;
+	MaxHealth = 100.f;
  	// Set this character to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
 
