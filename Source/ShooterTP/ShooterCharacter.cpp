@@ -14,6 +14,7 @@
 #include "PhysicalMaterials/PhysicalMaterial.h"
 #include "ShooterTP.h"
 #include "BulletHitInterface.h"
+#include "Enemy.h"
 
 // Sets default values
 AShooterCharacter::AShooterCharacter()
@@ -74,6 +75,9 @@ AShooterCharacter::AShooterCharacter()
 	GetCharacterMovement()->RotationRate = FRotator(0.f, 540.f, 0.f);
 	GetCharacterMovement()->JumpZVelocity = 600.f;
 	GetCharacterMovement()->AirControl = 0.2f;
+
+	Damage = 20.f;
+	HeadshotDamage = 50.f;
 }
 
 // Called when the game starts or when spawned
@@ -180,6 +184,11 @@ void AShooterCharacter::FireWeapon()
 				if (BulletHitInterface)
 				{
 					BulletHitInterface->BulletHit_Implementation(BeamHitResult);
+				}
+				AEnemy* HitEnemy = Cast<AEnemy>(BeamHitResult.Actor.Get());
+				if (HitEnemy)
+				{
+					UGameplayStatics::ApplyDamage(BeamHitResult.Actor.Get(), Damage, GetController(), this, UDamageType::StaticClass());
 				}
 			}
 			// Play default particles

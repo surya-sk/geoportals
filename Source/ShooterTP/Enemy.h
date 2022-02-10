@@ -41,4 +41,6 @@ public:
 
 	virtual void BulletHit_Implementation(FHitResult HitResult) override;
 
+	virtual float TakeDamage(float DamageAmount, struct FDamageEvent const& DamageEvent, AController* EventInstigator, AActor* DamageCauser) override;
+
 };
