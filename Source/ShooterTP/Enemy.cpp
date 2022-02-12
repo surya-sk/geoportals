@@ -32,7 +32,7 @@ void AEnemy::BeginPlay()
 	DrawDebugSphere(GetWorld(), WorldPatrolPoint, 25.f, 12, FColor::Red, true);
 	if(EnemyController)
 	{
-		EnemyController->GetBlackboardComponent()->SetValueAsVector(TEXT("Patrol Point"), WorldPatrolPoint);
+		EnemyController->GetBlackboardComponent()->SetValueAsVector(TEXT("PatrolPoint"), WorldPatrolPoint);
 		EnemyController->RunBehaviorTree(BehaviorTree);
 	}
 }
