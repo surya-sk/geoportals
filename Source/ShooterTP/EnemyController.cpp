@@ -4,6 +4,8 @@
 #include "EnemyController.h"
 #include "BehaviorTree/BlackboardComponent.h"
 #include "BehaviorTree/BehaviorTreeComponent.h"
+#include "Enemy.h"
+#include "BehaviorTree/BehaviorTree.h"
 
 AEnemyController::AEnemyController()
 {
@@ -17,4 +19,16 @@ AEnemyController::AEnemyController()
 void AEnemyController::OnPossess(APawn* InPawn)
 {
 	Super::OnPossess(InPawn);
+	if (InPawn == nullptr)
+	{
+		return;
+	}
+	AEnemy* Enemy = Cast<AEnemy>(InPawn);
+	if (Enemy)
+	{
+		if (Enemy->GetBehaviorTree())
+		{
+			BlackboardComponent->InitializeBlackboard(*(Enemy->GetBehaviorTree()->BlackboardAsset));
+		}
+	}
 }
