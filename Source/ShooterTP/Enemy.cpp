@@ -20,6 +20,10 @@ AEnemy::AEnemy()
 	HealthBarDisplayTime = 4.0f;
 	bStunned = false;
 	StunChance = 0.5f;
+	AttackLFast = TEXT("AttackLFast");
+	AttackRFast = TEXT("AttackRFast");
+	AttackL = TEXT("AttackL");
+	AttackR = TEXT("AttackR");
  	// Set this character to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
 
@@ -122,6 +126,16 @@ void AEnemy::CombatRangeEndOverlap(UPrimitiveComponent* OverlappedComponent, AAc
 		{
 			EnemyController->GetBlackboardComponent()->SetValueAsBool(TEXT("InAttackRange"), false);
 		}
+	}
+}
+
+void AEnemy::PlayAttackMontage(FName Section, float PlayRate)
+{
+	UAnimInstance* AnimInstance = GetMesh()->GetAnimInstance();
+	if (AnimInstance && AttackMontage)
+	{
+		AnimInstance->Montage_Play(AttackMontage);
+		AnimInstance->Montage_JumpToSection(Section, AttackMontage);
 	}
 }
 
