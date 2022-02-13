@@ -139,6 +139,28 @@ void AEnemy::PlayAttackMontage(FName Section, float PlayRate)
 	}
 }
 
+FName AEnemy::GetAttackSectionName()
+{
+	FName SectionName;
+	const int32 Section = FMath::RandRange(1, 4);
+	switch (Section)
+	{
+	case 1:
+		SectionName = AttackLFast;
+		break;
+	case 2:
+		SectionName = AttackRFast;
+		break;
+	case 3:
+		SectionName = AttackL;
+		break;
+	case 4:
+		SectionName = AttackR;
+		break;
+	}
+	return SectionName;
+}
+
 // Called every frame
 void AEnemy::Tick(float DeltaTime)
 {
