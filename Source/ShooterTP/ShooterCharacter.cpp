@@ -52,6 +52,9 @@ AShooterCharacter::AShooterCharacter()
 	StandingCapsuleHalfHeight = 88.f;
 	CrouchingCapsuleHalfHeight = 44.f;
 
+	Health = 100.f;
+	MaxHealth = 100.f;
+
  	// Set this character to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
 
@@ -78,6 +81,19 @@ AShooterCharacter::AShooterCharacter()
 
 	Damage = 20.f;
 	HeadshotDamage = 50.f;
+}
+
+float AShooterCharacter::TakeDamage(float DamageAmount, FDamageEvent const& DamageEvent, AController* EventInstigator, AActor* DamageCauser)
+{
+	if (Health - DamageAmount <= 0.f)
+	{
+		Health = 0.f;
+	}
+	else
+	{
+		Health -= DamageAmount;
+	}
+	return DamageAmount;
 }
 
 // Called when the game starts or when spawned
