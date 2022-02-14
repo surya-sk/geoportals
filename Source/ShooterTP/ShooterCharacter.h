@@ -196,6 +196,9 @@ private:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Combat, meta = (AllowPrivateAccess = "true"))
 	class USoundCue* MeleeImpactSound;
 
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Combat, meta = (AllowPrivateAccess = "true"))
+	UParticleSystem* BloodParticles;
+
 public:
 
 	FORCEINLINE USpringArmComponent* GetCameraBoom() const { return CameraBoom; }
@@ -205,4 +208,5 @@ public:
 	FORCEINLINE float GetDamage() const { return Damage; }
 	FORCEINLINE float GetHeadshotDamage() const { return HeadshotDamage; }
 	FORCEINLINE USoundCue* GetMeleeImpactSound() const { return MeleeImpactSound; }
+	FORCEINLINE UParticleSystem* GetBloodParticles() const { return BloodParticles; }
 };
