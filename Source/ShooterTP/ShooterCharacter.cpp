@@ -55,6 +55,8 @@ AShooterCharacter::AShooterCharacter()
 	Health = 100.f;
 	MaxHealth = 100.f;
 
+	CombatState = ECombatState::ECS_Unoccupied;
+
  	// Set this character to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
 
@@ -285,7 +287,10 @@ bool AShooterCharacter::GetBeamEndLocation(const FVector& MuzzleSocketLocation, 
 
 void AShooterCharacter::AimingButtonPressed()
 {
-	bAiming = true;
+	if (CombatState != ECombatState::ECS_Stunned)
+	{
+		bAiming = true;
+	}
 }
 
 void AShooterCharacter::AimingButtonReleased()
@@ -430,6 +435,11 @@ EPhysicalSurface AShooterCharacter::GetSurfaceType()
 
 	GetWorld()->LineTraceSingleByChannel(HitResult, Start, End, ECollisionChannel::ECC_Visibility, QueryParams);
 	return UPhysicalMaterial::DetermineSurfaceType(HitResult.PhysMaterial.Get());
+}
+
+void AShooterCharacter::EndStun()
+{
+	CombatState = ECombatState::ECS_Unoccupied;
 }
 
 // Called to bind functionality to input

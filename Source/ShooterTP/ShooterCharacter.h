@@ -7,6 +7,13 @@
 #include "ShooterCharacter.generated.h"
 
 UENUM(BlueprintType)
+enum class ECombatState : uint8
+{
+	ECS_Stunned UMETA(DisplayName = "Stunned"),
+	ECS_Unoccupied UMETA(DisplayNanme = "Unoccupied")
+};
+
+UENUM(BlueprintType)
 enum class EAmmoType : uint8
 {
 	EAT_9mm UMETA(DisplayName = "9mm"),
@@ -73,6 +80,9 @@ protected:
 
 	UFUNCTION(BlueprintCallable)
 	EPhysicalSurface GetSurfaceType();
+
+	UFUNCTION(BlueprintCallable)
+	void EndStun();
 
 public:	
 	// Called every frame
@@ -198,6 +208,9 @@ private:
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Combat, meta = (AllowPrivateAccess = "true"))
 	UParticleSystem* BloodParticles;
+
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Combat, meta = (AllowPrivateAccess = "true"))
+	ECombatState CombatState;
 
 public:
 
