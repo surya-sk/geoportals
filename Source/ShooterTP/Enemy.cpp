@@ -33,6 +33,7 @@ AEnemy::AEnemy()
 	bCanAttack = true;
 	AttackWaitTime = 1.f;
 	bDying = false;
+	DeathTime = 4.f;
  	// Set this character to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
 
@@ -255,6 +256,12 @@ void AEnemy::ResetCanAttack()
 
 void AEnemy::FinishDealth()
 {
+	GetMesh()->bPauseAnims = true;
+	GetWorldTimerManager().SetTimer(DeathTimer, this, &AEnemy::DestroyEnemy, DeathTime);
+}
+
+void AEnemy::DestroyEnemy()
+{
 	Destroy();
 }
 
@@ -324,6 +331,8 @@ void AEnemy::BulletHit_Implementation(FHitResult HitResult)
 	{
 		UGameplayStatics::SpawnEmitterAtLocation(this, ImpactParticles, HitResult.Location, FRotator(0.f), true);
 	}
+
+	if (bDying) return;
 	ShowHealthBar();
 
 	const float Stunned = FMath::FRandRange(0.f, 1.f);
