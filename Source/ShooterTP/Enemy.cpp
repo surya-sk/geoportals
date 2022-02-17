@@ -98,6 +98,11 @@ void AEnemy::ShowHealthBar_Implementation()
 void AEnemy::Die()
 {
 	HideHealthBar();
+	UAnimInstance* AnimInstance = GetMesh()->GetAnimInstance();
+	if (AnimInstance && DeathMontage)
+	{
+		AnimInstance->Montage_Play(DeathMontage);
+	}
 }
 
 void AEnemy::PlayHitMontage(FName Section, float PlayRate)
