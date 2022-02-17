@@ -103,6 +103,11 @@ void AEnemy::Die()
 	{
 		AnimInstance->Montage_Play(DeathMontage);
 	}
+	if (EnemyController)
+	{
+		EnemyController->GetBlackboardComponent()->SetValueAsBool(TEXT("Dead"), true);
+		EnemyController->StopMovement();
+	}
 }
 
 void AEnemy::PlayHitMontage(FName Section, float PlayRate)
