@@ -339,6 +339,11 @@ void AShooterCharacter::SetLookRates()
 
 void AShooterCharacter::FireButtonPressed()
 {
+	if (!bAiming)
+	{
+		bShootingWithoutAiming = true;
+		bAiming = true;
+	}
 	bFireButtonPressed = true;
 	StartFireTimer();
 }
@@ -346,6 +351,10 @@ void AShooterCharacter::FireButtonPressed()
 void AShooterCharacter::FireButtonReleased()
 {
 	bFireButtonPressed = false;
+	if (bShootingWithoutAiming)
+	{
+		bAiming = false;
+	}
 }
 
 void AShooterCharacter::StartFireTimer()
