@@ -299,6 +299,7 @@ void AShooterCharacter::AimingButtonPressed()
 	if (CombatState != ECombatState::ECS_Stunned)
 	{
 		bAiming = true;
+		GetCharacterMovement()->MaxWalkSpeed = BaseMovementSpeed;
 	}
 }
 
@@ -472,7 +473,10 @@ void AShooterCharacter::FinishDeath()
 
 void AShooterCharacter::SprintButtonPressed()
 {
-	GetCharacterMovement()->MaxWalkSpeed = RunSpeed;
+	if (!bAiming)
+	{
+		GetCharacterMovement()->MaxWalkSpeed = RunSpeed;
+	}
 }
 
 void AShooterCharacter::SprintButtonReleased()
