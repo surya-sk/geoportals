@@ -58,6 +58,7 @@ AShooterCharacter::AShooterCharacter()
 	MaxHealth = 100.f;
 
 	CombatState = ECombatState::ECS_Unoccupied;
+	RunSpeed = 1000.f;
 
  	// Set this character to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
@@ -469,6 +470,18 @@ void AShooterCharacter::FinishDeath()
 	}
 }
 
+void AShooterCharacter::SprintButtonPressed()
+{
+	GetCharacterMovement()->MaxWalkSpeed = RunSpeed;
+}
+
+void AShooterCharacter::SprintButtonReleased()
+{
+	GetCharacterMovement()->MaxWalkSpeed = BaseMovementSpeed;
+}
+
+
+
 // Called to bind functionality to input
 void AShooterCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 {
@@ -489,6 +502,8 @@ void AShooterCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputCo
 	PlayerInputComponent->BindAction("AimButton", EInputEvent::IE_Pressed, this, &AShooterCharacter::AimingButtonPressed);
 	PlayerInputComponent->BindAction("AimButton", EInputEvent::IE_Released, this, &AShooterCharacter::AimingButtonReleased);
 	PlayerInputComponent->BindAction("Crouch", EInputEvent::IE_Pressed, this, &AShooterCharacter::CrouchButtonPressed);
+	PlayerInputComponent->BindAction("Sprint", EInputEvent::IE_Pressed, this, &AShooterCharacter::SprintButtonPressed);
+	PlayerInputComponent->BindAction("Sprint", EInputEvent::IE_Released, this, &AShooterCharacter::SprintButtonReleased);
 }
 
 void AShooterCharacter::Stun()

@@ -89,6 +89,9 @@ protected:
 	UFUNCTION(BlueprintCallable)
 	void FinishDeath();
 
+	void SprintButtonPressed();
+	void SprintButtonReleased();
+
 public:	
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
@@ -225,6 +228,9 @@ private:
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Combat, meta = (AllowPrivateAccess = "true"))
 	UAnimMontage* DeathMontage;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Movement, meta = (AllowPrivateAccess = "true"))
+	float RunSpeed;
 
 public:
 
