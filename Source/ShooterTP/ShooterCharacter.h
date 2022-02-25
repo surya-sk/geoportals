@@ -78,6 +78,9 @@ protected:
 
 	void InterpCapsuleHalfHeight(float DeltaTime);
 
+	void PauseButtonPressed();
+	void PauseButtonReleased();
+
 	UFUNCTION(BlueprintCallable)
 	EPhysicalSurface GetSurfaceType();
 
@@ -233,6 +236,8 @@ private:
 	float RunSpeed;
 
 	bool bShootingWithoutAiming;
+
+	bool bPauseButtonPressed;
 
 public:
 

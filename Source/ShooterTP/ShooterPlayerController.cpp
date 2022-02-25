@@ -6,7 +6,37 @@
 
 AShooterPlayerController::AShooterPlayerController()
 {
+	bPauseMenuVisible = false;
+}
 
+void AShooterPlayerController::DisplayPauseMenu()
+{
+	if (PauseMenu)
+	{
+		bPauseMenuVisible = true;
+		PauseMenu->SetVisibility(ESlateVisibility::Visible);
+	}
+}
+
+void AShooterPlayerController::HidePauseMenu()
+{
+	if (PauseMenu)
+	{
+		bPauseMenuVisible = false;
+		PauseMenu->SetVisibility(ESlateVisibility::Hidden);
+	}
+}
+
+void AShooterPlayerController::TogglePauseMenu()
+{
+	if (!bPauseMenuVisible)
+	{
+		DisplayPauseMenu();
+	}
+	else
+	{
+		HidePauseMenu();
+	}
 }
 
 void AShooterPlayerController::BeginPlay()

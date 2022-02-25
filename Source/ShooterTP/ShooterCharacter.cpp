@@ -17,6 +17,7 @@
 #include "Enemy.h"
 #include "EnemyController.h"
 #include "BehaviorTree/BlackboardComponent.h"
+#include "ShooterPlayerController.h"
 
 // Sets default values
 AShooterCharacter::AShooterCharacter()
@@ -59,6 +60,8 @@ AShooterCharacter::AShooterCharacter()
 
 	CombatState = ECombatState::ECS_Unoccupied;
 	RunSpeed = 1000.f;
+
+	bPauseButtonPressed = false;
 
  	// Set this character to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
@@ -432,6 +435,21 @@ void AShooterCharacter::InterpCapsuleHalfHeight(float DeltaTime)
 	GetCapsuleComponent()->SetCapsuleHalfHeight(InterpHalfHeight);
 }
 
+void AShooterCharacter::PauseButtonPressed()
+{
+	bPauseButtonPressed = true;
+	auto PlayerController = GetWorld()->GetFirstPlayerController<AShooterPlayerController>();
+	if (PlayerController)
+	{
+		PlayerController->TogglePauseMenu();
+	}
+}
+
+void AShooterCharacter::PauseButtonReleased()
+{
+	bPauseButtonPressed = false;
+}
+
 void AShooterCharacter::SetCameraFOV(float DeltaTime)
 {
 	if (bAiming)
@@ -518,6 +536,8 @@ void AShooterCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputCo
 	PlayerInputComponent->BindAction("Crouch", EInputEvent::IE_Pressed, this, &AShooterCharacter::CrouchButtonPressed);
 	PlayerInputComponent->BindAction("Sprint", EInputEvent::IE_Pressed, this, &AShooterCharacter::SprintButtonPressed);
 	PlayerInputComponent->BindAction("Sprint", EInputEvent::IE_Released, this, &AShooterCharacter::SprintButtonReleased);
+	PlayerInputComponent->BindAction("Pause", EInputEvent::IE_Pressed, this, &AShooterCharacter::PauseButtonPressed);
+	PlayerInputComponent->BindAction("Pause", EInputEvent::IE_Pressed, this, &AShooterCharacter::PauseButtonReleased);
 }
 
 void AShooterCharacter::Stun()

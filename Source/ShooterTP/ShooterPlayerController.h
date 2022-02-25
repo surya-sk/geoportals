@@ -17,6 +17,11 @@ class SHOOTERTP_API AShooterPlayerController : public APlayerController
 public:
 	AShooterPlayerController();
 
+private:
+	void DisplayPauseMenu();
+	void HidePauseMenu();
+
+
 protected:
 	virtual void BeginPlay() override;
 
@@ -32,4 +37,9 @@ private:
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Widgets, meta = (AllowPrivateAccess = "true"))
 	UUserWidget* PauseMenu;
+
+	bool bPauseMenuVisible;
+
+public:
+	void TogglePauseMenu();
 };
