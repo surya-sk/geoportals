@@ -9,7 +9,7 @@ AShooterPlayerController::AShooterPlayerController()
 	bPauseMenuVisible = false;
 }
 
-void AShooterPlayerController::DisplayPauseMenu()
+void AShooterPlayerController::DisplayPauseMenu_Implementation()
 {
 	if (PauseMenu)
 	{
@@ -18,7 +18,7 @@ void AShooterPlayerController::DisplayPauseMenu()
 	}
 }
 
-void AShooterPlayerController::HidePauseMenu()
+void AShooterPlayerController::HidePauseMenu_Implementation()
 {
 	if (PauseMenu)
 	{

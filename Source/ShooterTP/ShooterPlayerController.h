@@ -18,8 +18,7 @@ public:
 	AShooterPlayerController();
 
 private:
-	void DisplayPauseMenu();
-	void HidePauseMenu();
+
 
 
 protected:
@@ -42,4 +41,9 @@ private:
 
 public:
 	void TogglePauseMenu();
+
+	UFUNCTION(BlueprintNativeEvent, BlueprintCallable)
+	void DisplayPauseMenu();
+	UFUNCTION(BlueprintNativeEvent, BlueprintCallable)
+	void HidePauseMenu();
 };
