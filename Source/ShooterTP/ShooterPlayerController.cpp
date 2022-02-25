@@ -3,6 +3,7 @@
 
 #include "ShooterPlayerController.h"
 #include "Blueprint/UserWidget.h"
+#include "Kismet/GameplayStatics.h"
 
 AShooterPlayerController::AShooterPlayerController()
 {
@@ -15,6 +16,10 @@ void AShooterPlayerController::DisplayPauseMenu_Implementation()
 	{
 		bPauseMenuVisible = true;
 		PauseMenu->SetVisibility(ESlateVisibility::Visible);
+
+		FInputModeGameAndUI InputUIModeGameAndUI;
+		SetInputMode(InputUIModeGameAndUI);
+		UGameplayStatics::SetGamePaused(this, true);
 	}
 }
 
@@ -23,7 +28,11 @@ void AShooterPlayerController::HidePauseMenu_Implementation()
 	if (PauseMenu)
 	{
 		bPauseMenuVisible = false;
+		UGameplayStatics::SetGamePaused(this, false);
 		PauseMenu->SetVisibility(ESlateVisibility::Hidden);
+		FInputModeGameOnly InputUIModeGameOnly;
+		SetInputMode(InputUIModeGameOnly);
+
 	}
 }
 
