@@ -354,6 +354,7 @@ void AShooterCharacter::FireButtonReleased()
 	if (bShootingWithoutAiming)
 	{
 		bAiming = false;
+		bShootingWithoutAiming = false;
 	}
 }
 
