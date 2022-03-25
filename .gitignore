@@ -82,6 +82,9 @@ Content/Elite_Landscapes/
 Content/PN_interactiveSpruceForest/
 Content/_Game/Maps/Level1.umap
 Content/STF/
+Content/ParagonSunWukong/
+Content/ParagonNarbash/
+Content/ParagonSevarog/
 
 # Cache files for the editor to use
 DerivedDataCache/*
