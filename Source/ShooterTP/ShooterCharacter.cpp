@@ -63,6 +63,9 @@ AShooterCharacter::AShooterCharacter()
 
 	bPauseButtonPressed = false;
 
+	Under60RegenRate = 0.02f;
+	Over60RegenRate = 0.01f;
+
  	// Set this character to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
 
@@ -321,6 +324,8 @@ void AShooterCharacter::Tick(float DeltaTime)
 	SetLookRates();
 	
 	InterpCapsuleHalfHeight(DeltaTime);
+
+	RegenerateHealth();
 }
 
 /// <summary>
@@ -510,6 +515,21 @@ void AShooterCharacter::SprintButtonPressed()
 void AShooterCharacter::SprintButtonReleased()
 {
 	GetCharacterMovement()->MaxWalkSpeed = BaseMovementSpeed;
+}
+
+void AShooterCharacter::RegenerateHealth()
+{
+	if (Health < MaxHealth)
+	{
+		if (Health < 100.f)
+		{
+			Health += Under60RegenRate;
+		}
+		else
+		{
+			Health += Over60RegenRate;
+		}
+	}
 }
 
 

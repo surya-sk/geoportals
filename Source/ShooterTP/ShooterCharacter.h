@@ -95,6 +95,8 @@ protected:
 	void SprintButtonPressed();
 	void SprintButtonReleased();
 
+	void RegenerateHealth();
+
 public:	
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
@@ -238,6 +240,12 @@ private:
 	bool bShootingWithoutAiming;
 
 	bool bPauseButtonPressed;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Health, meta = (AllowPrivateAccess = "true"))
+	float Under60RegenRate;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Health, meta = (AllowPrivateAccess = "true"))
+	float Over60RegenRate;
 
 public:
 
