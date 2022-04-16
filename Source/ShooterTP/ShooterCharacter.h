@@ -247,6 +247,8 @@ private:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Health, meta = (AllowPrivateAccess = "true"))
 	float Over60RegenRate;
 
+	FName CurrentLevelName;
+
 public:
 
 	FORCEINLINE USpringArmComponent* GetCameraBoom() const { return CameraBoom; }
@@ -262,4 +264,10 @@ public:
 	FORCEINLINE float GetStunChance() const { return StunChance; }
 
 	void SwitchLevel(FName LevelName);
+
+	UFUNCTION(BlueprintCallable)
+	void SaveGame();
+
+	UFUNCTION(BlueprintCallable)
+	void LoadGame(bool SetLocation);
 };

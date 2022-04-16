@@ -18,6 +18,7 @@
 #include "EnemyController.h"
 #include "BehaviorTree/BlackboardComponent.h"
 #include "ShooterPlayerController.h"
+#include "ShooterTPSaveGame.h"
 
 // Sets default values
 AShooterCharacter::AShooterCharacter()
@@ -65,6 +66,8 @@ AShooterCharacter::AShooterCharacter()
 
 	Under60RegenRate = 0.02f;
 	Over60RegenRate = 0.01f;
+
+	CurrentLevelName = "Default";
 
  	// Set this character to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
@@ -124,6 +127,14 @@ void AShooterCharacter::BeginPlay()
 	}
 	InitAmmoMap();
 	GetCharacterMovement()->MaxWalkSpeed = BaseMovementSpeed;
+
+	UWorld* World = GetWorld();
+	if (World)
+	{
+		FString CurrentLevel = World->GetMapName();
+
+		CurrentLevelName = (*CurrentLevel);
+	}
 }
 
 void AShooterCharacter::MoveForward(float Value)
@@ -576,13 +587,43 @@ void AShooterCharacter::SwitchLevel(FName LevelName)
 	UWorld* World = GetWorld();
 	if (World)
 	{
-		FString CurrentLevel = World->GetMapName();
-
-		FName CurrentLevelName(*CurrentLevel);
 		if (CurrentLevelName != LevelName)
 		{
 			UGameplayStatics::OpenLevel(World, LevelName);
 		}
+	}
+}
+
+void AShooterCharacter::SaveGame()
+{
+	UShooterTPSaveGame* SaveGameInstance = Cast<UShooterTPSaveGame>(UGameplayStatics::CreateSaveGameObject(UShooterTPSaveGame::StaticClass()));
+
+	if (SaveGameInstance)
+	{
+		SaveGameInstance->CharacterStats.Health = Health;
+		SaveGameInstance->CharacterStats.LevelName = CurrentLevelName;
+
+		SaveGameInstance->CharacterStats.Location = GetActorLocation();
+		SaveGameInstance->CharacterStats.Rotation = GetActorRotation();
+
+		UGameplayStatics::SaveGameToSlot(SaveGameInstance, SaveGameInstance->PlayerName, SaveGameInstance->UserIndex);
+	}
+}
+
+void AShooterCharacter::LoadGame(bool SetLocation)
+{
+	UShooterTPSaveGame* LoadGameInstance = Cast<UShooterTPSaveGame>(UGameplayStatics::CreateSaveGameObject(UShooterTPSaveGame::StaticClass()));
+	LoadGameInstance = Cast<UShooterTPSaveGame>(UGameplayStatics::LoadGameFromSlot(LoadGameInstance->PlayerName, LoadGameInstance->UserIndex));
+
+	if (SetLocation) // Not in a new level
+	{
+		Health = LoadGameInstance->CharacterStats.Health;
+		SetActorLocation(LoadGameInstance->CharacterStats.Location);
+		SetActorRotation(LoadGameInstance->CharacterStats.Rotation);
+	}
+	else
+	{
+		SwitchLevel(LoadGameInstance->CharacterStats.LevelName);
 	}
 }
 
