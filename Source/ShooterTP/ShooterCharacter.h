@@ -247,7 +247,7 @@ private:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Health, meta = (AllowPrivateAccess = "true"))
 	float Over60RegenRate;
 
-	FName CurrentLevelName;
+	class AShooterPlayerController* PlayerController;
 
 public:
 
@@ -262,8 +262,6 @@ public:
 
 	void Stun();
 	FORCEINLINE float GetStunChance() const { return StunChance; }
-
-	void SwitchLevel(FName LevelName);
 
 	UFUNCTION(BlueprintCallable)
 	void SaveGame();

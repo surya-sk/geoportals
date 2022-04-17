@@ -19,10 +19,12 @@ public:
 
 private:
 
-
+	int32 GetCurrentLevelIndex();
 
 protected:
 	virtual void BeginPlay() override;
+
+	void SwitchLevel();
 
 private:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Widgets, meta = (AllowPrivateAccess = "true"))
@@ -37,7 +39,19 @@ private:
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Widgets, meta = (AllowPrivateAccess = "true"))
 	UUserWidget* PauseMenu;
 
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Widgets, meta = (AllowPrivateAccess = "true"))
+	TSubclassOf<class UUserWidget> WMainMenu;
+
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Widgets, meta = (AllowPrivateAccess = "true"))
+	UUserWidget* MainMenu;
+
 	bool bPauseMenuVisible;
+
+	int32 CurrentLevelIndex;
+
+	FString Levels[6]{ "UEDPIE_0_Entry", "UEDPIE_0_Level1", "UEDPIE_0_Level2", "UEDPIE_0_Level3", "Level4", "Level5" };
+
+	FString LevelNames[6]{ "Entry", "Level1", "Level2", "Level3", "Level4", "Level5" };
 
 public:
 	void TogglePauseMenu();
@@ -46,4 +60,12 @@ public:
 	void DisplayPauseMenu();
 	UFUNCTION(BlueprintNativeEvent, BlueprintCallable)
 	void HidePauseMenu();
+
+	void DisplayMainMenu();
+
+	UFUNCTION(BlueprintCallable)
+	void SaveGame(float Heath, FVector Location, FRotator Rotation);
+
+	UFUNCTION(BlueprintCallable)
+	void LoadGame();
 };

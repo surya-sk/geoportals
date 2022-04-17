@@ -43,7 +43,7 @@ void ALevelTransitionVolume::OnOverlapBegin(UPrimitiveComponent* OverlappedComp,
 		AShooterCharacter* ShooterCharacter = Cast<AShooterCharacter>(OtherActor);
 		if (ShooterCharacter)
 		{
-			ShooterCharacter->SwitchLevel(LevelName);
+			ShooterCharacter->LoadGame(false);
 		}
 	}
 }

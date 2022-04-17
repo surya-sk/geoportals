@@ -15,7 +15,7 @@ struct FCharacterStats
 	float Health;
 
 	UPROPERTY(VisibleAnywhere, Category = "SaveData")
-	FName LevelName;
+	int32 LevelIndex;
 
 	UPROPERTY(VisibleAnywhere, Category = "SaveData")
 	FVector Location;
