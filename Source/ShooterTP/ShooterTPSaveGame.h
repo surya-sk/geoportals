@@ -23,6 +23,9 @@ struct FCharacterStats
 	UPROPERTY(VisibleAnywhere, Category = "SaveData")
 	FRotator Rotation;
 
+	UPROPERTY(VisibleAnywhere, Category = "SaveData")
+	bool bSetLocation;
+
 };
 
 /**

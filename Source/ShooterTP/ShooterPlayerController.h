@@ -64,7 +64,7 @@ public:
 	void DisplayMainMenu();
 
 	UFUNCTION(BlueprintCallable)
-	void SaveGame(float Heath, FVector Location, FRotator Rotation);
+	void SaveGame(float Heath, FVector Location, FRotator Rotation, bool bSetLocation);
 
 	UFUNCTION(BlueprintCallable)
 	void LoadGame();

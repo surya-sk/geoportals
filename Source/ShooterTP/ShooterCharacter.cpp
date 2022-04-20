@@ -126,6 +126,7 @@ void AShooterCharacter::BeginPlay()
 	InitAmmoMap();
 	GetCharacterMovement()->MaxWalkSpeed = BaseMovementSpeed;
 	PlayerController = Cast<AShooterPlayerController>(GetWorld()->GetFirstPlayerController());
+	LoadGame(false);
 }
 
 void AShooterCharacter::MoveForward(float Value)
@@ -572,31 +573,38 @@ void AShooterCharacter::Stun()
 	}
 }
 
-void AShooterCharacter::SaveGame()
+void AShooterCharacter::SaveGame(bool bSetLocation)
 {
 	if (PlayerController)
 	{
-		PlayerController->SaveGame(Health, GetActorLocation(), GetActorRotation());
+		PlayerController->SaveGame(Health, GetActorLocation(), GetActorRotation(), bSetLocation);
 	}
 }
 
-void AShooterCharacter::LoadGame(bool SetLocation)
+void AShooterCharacter::LoadGame(bool bLoadLevel)
 {
 	UShooterTPSaveGame* LoadGameInstance = Cast<UShooterTPSaveGame>(UGameplayStatics::CreateSaveGameObject(UShooterTPSaveGame::StaticClass()));
 	LoadGameInstance = Cast<UShooterTPSaveGame>(UGameplayStatics::LoadGameFromSlot(LoadGameInstance->PlayerName, LoadGameInstance->UserIndex));
 
-	if (SetLocation) // Not in a new level
+	if (LoadGameInstance)
 	{
-		Health = LoadGameInstance->CharacterStats.Health;
-		SetActorLocation(LoadGameInstance->CharacterStats.Location);
-		SetActorRotation(LoadGameInstance->CharacterStats.Rotation);
-	}
-	else
-	{
-		if (PlayerController)
+		bool bSetLocation = LoadGameInstance->CharacterStats.bSetLocation;
+
+		if (bSetLocation) // Not in a new level
 		{
-			PlayerController->LoadGame();
+			Health = LoadGameInstance->CharacterStats.Health;
+			SetActorLocation(LoadGameInstance->CharacterStats.Location);
+			SetActorRotation(LoadGameInstance->CharacterStats.Rotation);
+		}
+
+		if (bLoadLevel)
+		{
+			if (PlayerController)
+			{
+				PlayerController->LoadGame();
+			}
 		}
 	}
+
 }
 

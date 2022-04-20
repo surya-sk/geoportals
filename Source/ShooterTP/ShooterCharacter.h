@@ -264,8 +264,8 @@ public:
 	FORCEINLINE float GetStunChance() const { return StunChance; }
 
 	UFUNCTION(BlueprintCallable)
-	void SaveGame();
+	void SaveGame(bool bSetLocation);
 
 	UFUNCTION(BlueprintCallable)
-	void LoadGame(bool SetLocation);
+	void LoadGame(bool bLoadLevel);
 };

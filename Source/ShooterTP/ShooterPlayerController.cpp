@@ -65,7 +65,7 @@ void AShooterPlayerController::DisplayMainMenu()
 	}
 }
 
-void AShooterPlayerController::SaveGame(float Heath, FVector Location, FRotator Rotation)
+void AShooterPlayerController::SaveGame(float Heath, FVector Location, FRotator Rotation, bool bSetLocation)
 {
 	UShooterTPSaveGame* SaveGameInstance = Cast<UShooterTPSaveGame>(UGameplayStatics::CreateSaveGameObject(UShooterTPSaveGame::StaticClass()));
 
@@ -73,6 +73,7 @@ void AShooterPlayerController::SaveGame(float Heath, FVector Location, FRotator 
 	SaveGameInstance->CharacterStats.Location = Location;
 	SaveGameInstance->CharacterStats.Rotation = Rotation;
 	SaveGameInstance->CharacterStats.LevelIndex = GetCurrentLevelIndex();
+	SaveGameInstance->CharacterStats.bSetLocation = bSetLocation;
 
 	UGameplayStatics::SaveGameToSlot(SaveGameInstance, SaveGameInstance->PlayerName, SaveGameInstance->UserIndex);
 }
