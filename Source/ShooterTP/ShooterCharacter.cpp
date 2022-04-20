@@ -608,3 +608,11 @@ void AShooterCharacter::LoadGame(bool bLoadLevel)
 
 }
 
+void AShooterCharacter::LoadNextLevel()
+{
+	if(PlayerController)
+	{
+		PlayerController->LoadNextLevel();
+	}
+}
+

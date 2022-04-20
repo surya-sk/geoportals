@@ -268,4 +268,6 @@ public:
 
 	UFUNCTION(BlueprintCallable)
 	void LoadGame(bool bLoadLevel);
+
+	void LoadNextLevel();
 };

@@ -49,9 +49,9 @@ private:
 
 	int32 CurrentLevelIndex;
 
-	FString Levels[6]{ "UEDPIE_0_Entry", "UEDPIE_0_Level1", "UEDPIE_0_Level2", "UEDPIE_0_Level3", "Level4", "Level5" };
+	FString Levels[6]{ "UEDPIE_0_Opening", "UEDPIE_0_Level1", "UEDPIE_0_Level2", "UEDPIE_0_Level3", "Level4", "Level5" };
 
-	FString LevelNames[6]{ "Entry", "Level1", "Level2", "Level3", "Level4", "Level5" };
+	FString LevelNames[6]{ "Opening", "Level1", "Level2", "Level3", "Level4", "Level5" };
 
 public:
 	void TogglePauseMenu();
@@ -68,4 +68,6 @@ public:
 
 	UFUNCTION(BlueprintCallable)
 	void LoadGame();
+
+	void LoadNextLevel();
 };

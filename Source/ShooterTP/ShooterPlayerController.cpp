@@ -72,8 +72,8 @@ void AShooterPlayerController::SaveGame(float Heath, FVector Location, FRotator 
 	SaveGameInstance->CharacterStats.Health = Heath;
 	SaveGameInstance->CharacterStats.Location = Location;
 	SaveGameInstance->CharacterStats.Rotation = Rotation;
-	SaveGameInstance->CharacterStats.LevelIndex = GetCurrentLevelIndex();
 	SaveGameInstance->CharacterStats.bSetLocation = bSetLocation;
+	SaveGameInstance->CharacterStats.LevelIndex = GetCurrentLevelIndex();
 
 	UGameplayStatics::SaveGameToSlot(SaveGameInstance, SaveGameInstance->PlayerName, SaveGameInstance->UserIndex);
 }
@@ -83,8 +83,27 @@ void AShooterPlayerController::LoadGame()
 	UShooterTPSaveGame* LoadGameInstance = Cast<UShooterTPSaveGame>(UGameplayStatics::CreateSaveGameObject(UShooterTPSaveGame::StaticClass()));
 	LoadGameInstance = Cast<UShooterTPSaveGame>(UGameplayStatics::LoadGameFromSlot(LoadGameInstance->PlayerName, LoadGameInstance->UserIndex));
 
-	CurrentLevelIndex = LoadGameInstance->CharacterStats.LevelIndex;
+	if (LoadGameInstance)
+	{
+		CurrentLevelIndex = LoadGameInstance->CharacterStats.LevelIndex;
+	}
+	else
+	{
+		CurrentLevelIndex = 0;
+	}
 	UE_LOG(LogTemp, Warning, TEXT("%d"), CurrentLevelIndex);
+	SwitchLevel();
+}
+
+void AShooterPlayerController::LoadNextLevel()
+{
+	CurrentLevelIndex++;
+	UShooterTPSaveGame* SaveGameInstance = Cast<UShooterTPSaveGame>(UGameplayStatics::CreateSaveGameObject(UShooterTPSaveGame::StaticClass()));
+	SaveGameInstance->CharacterStats.LevelIndex = CurrentLevelIndex;
+	SaveGameInstance->CharacterStats.bSetLocation = false;
+
+	UGameplayStatics::SaveGameToSlot(SaveGameInstance, SaveGameInstance->PlayerName, SaveGameInstance->UserIndex);
+
 	SwitchLevel();
 }
 
@@ -111,6 +130,7 @@ void AShooterPlayerController::BeginPlay()
 
 	else
 	{
+		SetInputMode(FInputModeGameAndUI());
 		if (HUDOverlayClass)
 		{
 			HUDOverlay = CreateWidget<UUserWidget>(this, HUDOverlayClass);
