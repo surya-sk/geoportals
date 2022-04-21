@@ -59,8 +59,8 @@ void AShooterPlayerController::DisplayMainMenu()
 		{
 			MainMenu->AddToViewport();
 			MainMenu->SetVisibility(ESlateVisibility::Visible);
-			FInputModeUIOnly InputUIModeGameAndUI;
-			SetInputMode(InputUIModeGameAndUI);
+			FInputModeUIOnly InputUIModeUIOnly;
+			SetInputMode(InputUIModeUIOnly);
 		}
 	}
 }
