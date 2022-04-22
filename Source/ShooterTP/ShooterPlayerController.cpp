@@ -12,29 +12,30 @@ AShooterPlayerController::AShooterPlayerController()
 	CurrentLevelIndex = 0;
 }
 
-void AShooterPlayerController::DisplayPauseMenu_Implementation()
+void AShooterPlayerController::DisplayPauseMenu()
 {
+	PauseMenu = CreateWidget<UUserWidget>(this, WPauseMenu);
 	if (PauseMenu)
 	{
+		HUDOverlay->SetVisibility(ESlateVisibility::Hidden);
+		PauseMenu->AddToViewport();
 		bPauseMenuVisible = true;
 		PauseMenu->SetVisibility(ESlateVisibility::Visible);
-
-		FInputModeGameAndUI InputUIModeGameAndUI;
-		SetInputMode(InputUIModeGameAndUI);
-		UGameplayStatics::SetGamePaused(this, true);
+		SetInputMode(FInputModeGameAndUI());
+		//UGameplayStatics::SetGamePaused(this, true);
 	}
 }
 
-void AShooterPlayerController::HidePauseMenu_Implementation()
+void AShooterPlayerController::HidePauseMenu()
 {
+	UE_LOG(LogTemp, Warning, TEXT("Hiding Pause menu"));
 	if (PauseMenu)
 	{
 		bPauseMenuVisible = false;
-		UGameplayStatics::SetGamePaused(this, false);
-		PauseMenu->SetVisibility(ESlateVisibility::Hidden);
+		//UGameplayStatics::SetGamePaused(this, false);
+		PauseMenu->RemoveFromViewport();
 		FInputModeGameOnly InputUIModeGameOnly;
 		SetInputMode(InputUIModeGameOnly);
-
 	}
 }
 
@@ -130,7 +131,7 @@ void AShooterPlayerController::BeginPlay()
 
 	else
 	{
-		SetInputMode(FInputModeGameAndUI());
+		SetInputMode(FInputModeGameOnly());
 		if (HUDOverlayClass)
 		{
 			HUDOverlay = CreateWidget<UUserWidget>(this, HUDOverlayClass);
@@ -138,16 +139,6 @@ void AShooterPlayerController::BeginPlay()
 			{
 				HUDOverlay->AddToViewport();
 				HUDOverlay->SetVisibility(ESlateVisibility::Visible);
-			}
-		}
-
-		if (WPauseMenu)
-		{
-			PauseMenu = CreateWidget<UUserWidget>(this, WPauseMenu);
-			if (PauseMenu)
-			{
-				PauseMenu->AddToViewport();
-				PauseMenu->SetVisibility(ESlateVisibility::Hidden);
 			}
 		}
 	}

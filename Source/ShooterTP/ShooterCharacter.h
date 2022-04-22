@@ -239,8 +239,6 @@ private:
 
 	bool bShootingWithoutAiming;
 
-	bool bPauseButtonPressed;
-
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Health, meta = (AllowPrivateAccess = "true"))
 	float Under60RegenRate;
 

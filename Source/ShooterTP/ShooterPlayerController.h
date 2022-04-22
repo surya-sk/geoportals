@@ -45,6 +45,7 @@ private:
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Widgets, meta = (AllowPrivateAccess = "true"))
 	UUserWidget* MainMenu;
 
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Widgets, meta = (AllowPrivateAccess = "true"))
 	bool bPauseMenuVisible;
 
 	int32 CurrentLevelIndex;
@@ -54,11 +55,13 @@ private:
 	FString LevelNames[6]{ "Opening", "Level1", "Level2", "Level3", "Level4", "Level5" };
 
 public:
+	UFUNCTION(BlueprintCallable)
 	void TogglePauseMenu();
 
-	UFUNCTION(BlueprintNativeEvent, BlueprintCallable)
+	UFUNCTION(BlueprintCallable)
 	void DisplayPauseMenu();
-	UFUNCTION(BlueprintNativeEvent, BlueprintCallable)
+
+	UFUNCTION(BlueprintCallable)
 	void HidePauseMenu();
 
 	void DisplayMainMenu();

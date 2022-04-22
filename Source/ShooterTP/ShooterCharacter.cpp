@@ -62,8 +62,6 @@ AShooterCharacter::AShooterCharacter()
 	CombatState = ECombatState::ECS_Unoccupied;
 	RunSpeed = 1000.f;
 
-	bPauseButtonPressed = false;
-
 	Under60RegenRate = 0.02f;
 	Over60RegenRate = 0.01f;
 
@@ -445,17 +443,13 @@ void AShooterCharacter::InterpCapsuleHalfHeight(float DeltaTime)
 
 void AShooterCharacter::PauseButtonPressed()
 {
-	bPauseButtonPressed = true;
+	UE_LOG(LogTemp, Warning, TEXT("Button pressed"));
 	if (PlayerController)
 	{
 		PlayerController->TogglePauseMenu();
 	}
 }
 
-void AShooterCharacter::PauseButtonReleased()
-{
-	bPauseButtonPressed = false;
-}
 
 void AShooterCharacter::SetCameraFOV(float DeltaTime)
 {
@@ -559,7 +553,6 @@ void AShooterCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputCo
 	PlayerInputComponent->BindAction("Sprint", EInputEvent::IE_Pressed, this, &AShooterCharacter::SprintButtonPressed);
 	PlayerInputComponent->BindAction("Sprint", EInputEvent::IE_Released, this, &AShooterCharacter::SprintButtonReleased);
 	PlayerInputComponent->BindAction("Pause", EInputEvent::IE_Pressed, this, &AShooterCharacter::PauseButtonPressed);
-	PlayerInputComponent->BindAction("Pause", EInputEvent::IE_Pressed, this, &AShooterCharacter::PauseButtonReleased);
 }
 
 void AShooterCharacter::Stun()
