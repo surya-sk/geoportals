@@ -21,7 +21,8 @@ void AShooterPlayerController::DisplayPauseMenu()
 		PauseMenu->AddToViewport();
 		bPauseMenuVisible = true;
 		PauseMenu->SetVisibility(ESlateVisibility::Visible);
-		SetInputMode(FInputModeGameAndUI());
+		SetInputMode(FInputModeUIOnly());
+		
 		//UGameplayStatics::SetGamePaused(this, true);
 	}
 }
