@@ -97,6 +97,8 @@ protected:
 
 	void RegenerateHealth();
 
+	void HandleStamina();
+
 public:	
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
@@ -246,6 +248,20 @@ private:
 	float Over60RegenRate;
 
 	class AShooterPlayerController* PlayerController;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Combat, meta = (AllowPrivateAccess = "true"))
+	float Stamina;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Combat, meta = (AllowPrivateAccess = "true"))
+	float MaxStamina;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Combat, meta = (AllowPrivateAccess = "true"))
+	float StaminaDrainRate;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Combat, meta = (AllowPrivateAccess = "true"))
+	float StaminaRegenRate;
+
+	bool bSprinting;
 
 public:
 

@@ -65,6 +65,13 @@ AShooterCharacter::AShooterCharacter()
 	Under60RegenRate = 0.02f;
 	Over60RegenRate = 0.01f;
 
+	Stamina = 100.f;
+	MaxStamina = 100.f;
+	StaminaDrainRate = 1.f;
+	StaminaRegenRate = 2.f;
+
+	bSprinting = false;
+
  	// Set this character to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
 
@@ -327,6 +334,10 @@ void AShooterCharacter::Tick(float DeltaTime)
 	InterpCapsuleHalfHeight(DeltaTime);
 
 	RegenerateHealth();
+
+	HandleStamina();
+
+	UE_LOG(LogTemp, Warning, TEXT("%f"), Stamina);
 }
 
 /// <summary>
@@ -504,12 +515,16 @@ void AShooterCharacter::SprintButtonPressed()
 {
 	if (!bAiming)
 	{
-		GetCharacterMovement()->MaxWalkSpeed = RunSpeed;
+		if (Stamina > 0.f)
+		{
+			bSprinting = true;
+		}
 	}
 }
 
 void AShooterCharacter::SprintButtonReleased()
 {
+	bSprinting = false;
 	GetCharacterMovement()->MaxWalkSpeed = BaseMovementSpeed;
 }
 
@@ -524,6 +539,23 @@ void AShooterCharacter::RegenerateHealth()
 		else
 		{
 			Health += Over60RegenRate;
+		}
+	}
+}
+
+void AShooterCharacter::HandleStamina()
+{
+	if (bSprinting && (Stamina - StaminaDrainRate > 0.f))
+	{
+			GetCharacterMovement()->MaxWalkSpeed = RunSpeed;
+			Stamina -= StaminaDrainRate;
+	}
+	else
+	{
+		GetCharacterMovement()->MaxWalkSpeed = BaseMovementSpeed;
+		if (Stamina < MaxStamina)
+		{
+			Stamina += StaminaRegenRate;
 		}
 	}
 }
