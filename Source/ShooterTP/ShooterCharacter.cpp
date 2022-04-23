@@ -336,8 +336,6 @@ void AShooterCharacter::Tick(float DeltaTime)
 	RegenerateHealth();
 
 	HandleStamina();
-
-	UE_LOG(LogTemp, Warning, TEXT("%f"), Stamina);
 }
 
 /// <summary>
