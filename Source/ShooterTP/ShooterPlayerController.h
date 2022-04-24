@@ -48,6 +48,12 @@ private:
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Widgets, meta = (AllowPrivateAccess = "true"))
 	bool bPauseMenuVisible;
 
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Widgets, meta = (AllowPrivateAccess = "true"))
+	TSubclassOf<class UUserWidget> WExpositionText;
+
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Widgets, meta = (AllowPrivateAccess = "true"))
+	UUserWidget* ExpositionText;
+
 	int32 CurrentLevelIndex;
 
 	FString Levels[6]{ "UEDPIE_0_Opening", "UEDPIE_0_Level1", "UEDPIE_0_Level2", "UEDPIE_0_Level3", "Level4", "Level5" };
@@ -73,4 +79,9 @@ public:
 	void LoadGame();
 
 	void LoadNextLevel();
+
+	UFUNCTION(BlueprintCallable)
+	void CloseExpositionText();
+
+	void ShowExpositionText();
 };

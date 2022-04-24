@@ -29,10 +29,10 @@ void AShooterPlayerController::DisplayPauseMenu()
 
 void AShooterPlayerController::HidePauseMenu()
 {
-	UE_LOG(LogTemp, Warning, TEXT("Hiding Pause menu"));
 	if (PauseMenu)
 	{
 		bPauseMenuVisible = false;
+		HUDOverlay->SetVisibility(ESlateVisibility::Visible);
 		//UGameplayStatics::SetGamePaused(this, false);
 		PauseMenu->RemoveFromViewport();
 		FInputModeGameOnly InputUIModeGameOnly;
@@ -107,6 +107,33 @@ void AShooterPlayerController::LoadNextLevel()
 	UGameplayStatics::SaveGameToSlot(SaveGameInstance, SaveGameInstance->PlayerName, SaveGameInstance->UserIndex);
 
 	SwitchLevel();
+}
+
+void AShooterPlayerController::CloseExpositionText()
+{
+	if (ExpositionText)
+	{
+		HUDOverlay->SetVisibility(ESlateVisibility::Visible);
+		ExpositionText->RemoveFromViewport();
+		FInputModeGameOnly InputUIModeGameOnly;
+		SetInputMode(InputUIModeGameOnly);
+	}
+}
+
+void AShooterPlayerController::ShowExpositionText()
+{
+	if (WExpositionText)
+	{
+		ExpositionText = CreateWidget<UUserWidget>(this, WExpositionText);
+		if (ExpositionText)
+		{
+			HUDOverlay->SetVisibility(ESlateVisibility::Hidden);
+			ExpositionText->AddToViewport();
+			ExpositionText->SetVisibility(ESlateVisibility::Visible);
+			FInputModeUIOnly InputModeUIOnly;
+			SetInputMode(InputModeUIOnly);
+		}
+	}
 }
 
 
