@@ -136,6 +136,22 @@ void AShooterPlayerController::ShowExpositionText()
 	}
 }
 
+void AShooterPlayerController::ShowTutorialText()
+{
+	if (TutorialText)
+	{
+		TutorialText->SetVisibility(ESlateVisibility::Visible);
+	}
+}
+
+void AShooterPlayerController::HideTutorialText()
+{
+	if (TutorialText)
+	{
+		TutorialText->SetVisibility(ESlateVisibility::Hidden);
+	}
+}
+
 
 int32 AShooterPlayerController::GetCurrentLevelIndex()
 {
@@ -167,6 +183,15 @@ void AShooterPlayerController::BeginPlay()
 			{
 				HUDOverlay->AddToViewport();
 				HUDOverlay->SetVisibility(ESlateVisibility::Visible);
+			}
+		}
+		if (WTutorialText)
+		{
+			TutorialText = CreateWidget<UUserWidget>(this, WTutorialText);
+			if (TutorialText)
+			{
+				TutorialText->AddToViewport();
+				TutorialText->SetVisibility(ESlateVisibility::Hidden);
 			}
 		}
 	}

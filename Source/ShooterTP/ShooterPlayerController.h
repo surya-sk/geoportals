@@ -54,6 +54,12 @@ private:
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Widgets, meta = (AllowPrivateAccess = "true"))
 	UUserWidget* ExpositionText;
 
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Widgets, meta = (AllowPrivateAccess = "true"))
+	TSubclassOf<class UUserWidget> WTutorialText;
+
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Widgets, meta = (AllowPrivateAccess = "true"))
+	UUserWidget* TutorialText;
+
 	int32 CurrentLevelIndex;
 
 	FString Levels[6]{ "UEDPIE_0_Opening", "UEDPIE_0_Level1", "UEDPIE_0_Level2", "UEDPIE_0_Level3", "Level4", "Level5" };
@@ -84,4 +90,8 @@ public:
 	void CloseExpositionText();
 
 	void ShowExpositionText();
+
+	void ShowTutorialText();
+
+	void HideTutorialText();
 };

@@ -4,26 +4,29 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/Actor.h"
-#include "ExpositionVolume.generated.h"
+#include "TutorialBox.generated.h"
 
 UCLASS()
-class SHOOTERTP_API AExpositionVolume : public AActor
+class SHOOTERTP_API ATutorialBox : public AActor
 {
 	GENERATED_BODY()
 	
 public:	
 	// Sets default values for this actor's properties
-	AExpositionVolume();
+	ATutorialBox();
 
-	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Exposition")
-	class UBoxComponent* ExpositionVolume;
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Tutorial")
+	class UBoxComponent* TutorialBox;
 
-	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Exposition")
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Tutorial")
 	class UBillboardComponent* Billboard;
 
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
+
+private:
+	class AShooterPlayerController* PlayerController;
 
 public:	
 	// Called every frame
@@ -31,4 +34,9 @@ public:
 
 	UFUNCTION()
 	virtual void OnOverlapBegin(class UPrimitiveComponent* OverlappedComp, class AActor* OtherActor, class UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult);
+
+	// declare overlap end function
+	UFUNCTION()
+	virtual void OnOverlapEnd(class UPrimitiveComponent* OverlappedComp, class AActor* OtherActor, class UPrimitiveComponent* OtherComp, int32 OtherBodyIndex);
+
 };
