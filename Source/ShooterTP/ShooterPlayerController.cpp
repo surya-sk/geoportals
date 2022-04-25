@@ -9,7 +9,7 @@
 AShooterPlayerController::AShooterPlayerController()
 {
 	bPauseMenuVisible = false;
-	CurrentLevelIndex = 0;
+	CurrentLevelIndex = -1;
 }
 
 void AShooterPlayerController::DisplayPauseMenu()
@@ -103,6 +103,7 @@ void AShooterPlayerController::LoadNextLevel()
 	UShooterTPSaveGame* SaveGameInstance = Cast<UShooterTPSaveGame>(UGameplayStatics::CreateSaveGameObject(UShooterTPSaveGame::StaticClass()));
 	SaveGameInstance->CharacterStats.LevelIndex = CurrentLevelIndex;
 	SaveGameInstance->CharacterStats.bSetLocation = false;
+	UE_LOG(LogTemp, Warning, TEXT("%d"), CurrentLevelIndex);
 
 	UGameplayStatics::SaveGameToSlot(SaveGameInstance, SaveGameInstance->PlayerName, SaveGameInstance->UserIndex);
 
@@ -113,7 +114,7 @@ void AShooterPlayerController::CloseExpositionText()
 {
 	if (ExpositionText)
 	{
-		HUDOverlay->SetVisibility(ESlateVisibility::Visible);
+		//HUDOverlay->SetVisibility(ESlateVisibility::Visible);
 		ExpositionText->RemoveFromViewport();
 		FInputModeGameOnly InputUIModeGameOnly;
 		SetInputMode(InputUIModeGameOnly);
@@ -127,7 +128,7 @@ void AShooterPlayerController::ShowExpositionText()
 		ExpositionText = CreateWidget<UUserWidget>(this, WExpositionText);
 		if (ExpositionText)
 		{
-			HUDOverlay->SetVisibility(ESlateVisibility::Hidden);
+			//HUDOverlay->SetVisibility(ESlateVisibility::Hidden);
 			ExpositionText->AddToViewport();
 			ExpositionText->SetVisibility(ESlateVisibility::Visible);
 			FInputModeUIOnly InputModeUIOnly;
@@ -168,13 +169,14 @@ void AShooterPlayerController::BeginPlay()
 	Super::BeginPlay();
 
 	FString CurrentLevelName = GetWorld()->GetMapName();
-	if (CurrentLevelName == "UEDPIE_0_MainMenu")
+	if (CurrentLevelName == "UEDPIE_0_MainMenu" || CurrentLevelName == "MainMenu")
 	{
 		DisplayMainMenu();
 	}
 
 	else
 	{
+		CurrentLevelIndex = GetCurrentLevelIndex();
 		SetInputMode(FInputModeGameOnly());
 		if (HUDOverlayClass)
 		{
