@@ -84,10 +84,21 @@ Content/Subway_Tunnel/
 Content/PN_interactiveSpruceForest/
 Content/_Game/Maps/Level1.umap
 Content/_Game/Maps/Level2.umap
+Content/_Game/Maps/Level4.umap
 Content/STF/
 Content/ParagonSunWukong/
 Content/ParagonNarbash/
 Content/ParagonSevarog/
+Content/Audio/
+Content/Blueprints/
+Content/Fx/
+Content/Maps/TechArt.umap
+Content/Materials/
+Content/Meshes/
+Content/Sequences/
+Content/Textures/
+Content/_Game/Maps/Demonstration.umap
+
 
 # Cache files for the editor to use
 DerivedDataCache/*
