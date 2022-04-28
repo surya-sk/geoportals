@@ -93,7 +93,7 @@ void AShooterPlayerController::LoadGame()
 	{
 		CurrentLevelIndex = 0;
 	}
-	UE_LOG(LogTemp, Warning, TEXT("%d"), CurrentLevelIndex);
+	UE_LOG(LogTemp, Warning, TEXT("LOAD_GAME: Index is %d"), CurrentLevelIndex);
 	SwitchLevel();
 }
 
@@ -103,7 +103,7 @@ void AShooterPlayerController::LoadNextLevel()
 	UShooterTPSaveGame* SaveGameInstance = Cast<UShooterTPSaveGame>(UGameplayStatics::CreateSaveGameObject(UShooterTPSaveGame::StaticClass()));
 	SaveGameInstance->CharacterStats.LevelIndex = CurrentLevelIndex;
 	SaveGameInstance->CharacterStats.bSetLocation = false;
-	UE_LOG(LogTemp, Warning, TEXT("%d"), CurrentLevelIndex);
+	UE_LOG(LogTemp, Warning, TEXT("LOAD_NEXT_LEVEL: Index is %d"), CurrentLevelIndex);
 
 	UGameplayStatics::SaveGameToSlot(SaveGameInstance, SaveGameInstance->PlayerName, SaveGameInstance->UserIndex);
 
@@ -159,9 +159,9 @@ int32 AShooterPlayerController::GetCurrentLevelIndex()
 	FString CurrentLevelName = GetWorld()->GetMapName();
 	FName CurrentLevel = (*CurrentLevelName);
 
-	int32 size = sizeof(Levels) / sizeof(Levels[0]);
-	auto itr = std::find(Levels, Levels + size, CurrentLevelName);
-	return std::distance(Levels, itr);
+	int32 size = sizeof(LevelNames) / sizeof(LevelNames[0]);
+	auto itr = std::find(LevelNames, LevelNames + size, CurrentLevelName);
+	return std::distance(LevelNames, itr);
 }
 
 void AShooterPlayerController::BeginPlay()
@@ -197,6 +197,8 @@ void AShooterPlayerController::BeginPlay()
 			}
 		}
 	}
+
+	UE_LOG(LogTemp, Warning, TEXT("BEGIN_PLAY: Current level name is %s and index is %d"), *CurrentLevelName, CurrentLevelIndex);
 }
 
 void AShooterPlayerController::SwitchLevel()
