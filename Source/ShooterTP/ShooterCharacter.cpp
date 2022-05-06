@@ -502,10 +502,9 @@ void AShooterCharacter::Die()
 void AShooterCharacter::FinishDeath()
 {
 	GetMesh()->bPauseAnims = true;
-	APlayerController* PC = UGameplayStatics::GetPlayerController(this, 0);
-	if (PC)
+	if (PlayerController)
 	{
-		DisableInput(PC);
+		PlayerController->DisplayGameOverMenu();
 	}
 }
 

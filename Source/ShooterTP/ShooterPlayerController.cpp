@@ -153,6 +153,24 @@ void AShooterPlayerController::HideTutorialText()
 	}
 }
 
+void AShooterPlayerController::DisplayGameOverMenu()
+{
+	if (WGameOverMenu)
+	{
+		GameOverMenu = CreateWidget<UUserWidget>(this, WGameOverMenu);
+		if (GameOverMenu)
+		{
+			GameOverMenu->AddToViewport();
+			GameOverMenu->SetVisibility(ESlateVisibility::Visible);
+			SetInputMode(FInputModeUIOnly());
+		}
+	}
+}
+
+void AShooterPlayerController::HideGameOverMenu()
+{
+}
+
 
 int32 AShooterPlayerController::GetCurrentLevelIndex()
 {
