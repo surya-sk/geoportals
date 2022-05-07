@@ -263,6 +263,9 @@ private:
 
 	bool bSprinting;
 
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Stamina, meta = (AllowPrivateAccess = "true"))
+	USoundCue* TiredSound;
+
 public:
 
 	FORCEINLINE USpringArmComponent* GetCameraBoom() const { return CameraBoom; }

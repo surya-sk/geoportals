@@ -550,6 +550,13 @@ void AShooterCharacter::HandleStamina()
 	else
 	{
 		GetCharacterMovement()->MaxWalkSpeed = BaseMovementSpeed;
+		if (Stamina < 5.f)
+		{
+			if (TiredSound)
+			{
+				UGameplayStatics::PlaySoundAtLocation(this, TiredSound, GetActorLocation());
+			}
+		}
 		if (Stamina < MaxStamina)
 		{
 			Stamina += StaminaRegenRate;
