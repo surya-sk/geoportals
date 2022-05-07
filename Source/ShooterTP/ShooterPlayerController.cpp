@@ -177,9 +177,11 @@ int32 AShooterPlayerController::GetCurrentLevelIndex()
 	FString CurrentLevelName = GetWorld()->GetMapName();
 	FName CurrentLevel = (*CurrentLevelName);
 
-	int32 size = sizeof(LevelNames) / sizeof(LevelNames[0]);
-	auto itr = std::find(LevelNames, LevelNames + size, CurrentLevelName);
-	return std::distance(LevelNames, itr);
+	UE_LOG(LogTemp, Warning, TEXT("GetLevelIndex: Level Name: %s"), *CurrentLevelName);
+
+	int32 size = sizeof(Levels) / sizeof(Levels[0]);
+	auto itr = std::find(Levels, Levels + size, CurrentLevelName);
+	return std::distance(Levels, itr);
 }
 
 void AShooterPlayerController::BeginPlay()
