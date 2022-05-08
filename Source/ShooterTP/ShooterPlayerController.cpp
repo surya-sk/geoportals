@@ -179,9 +179,15 @@ int32 AShooterPlayerController::GetCurrentLevelIndex()
 
 	UE_LOG(LogTemp, Warning, TEXT("GetLevelIndex: Level Name: %s"), *CurrentLevelName);
 
+#if WITH_EDITOR
 	int32 size = sizeof(Levels) / sizeof(Levels[0]);
 	auto itr = std::find(Levels, Levels + size, CurrentLevelName);
 	return std::distance(Levels, itr);
+#else
+	int32 size = sizeof(LevelNames) / sizeof(LevelNames[0]);
+	auto itr = std::find(LevelNames, LevelNames + size, CurrentLevelName);
+	return std::distance(LevelNames, itr);
+#endif
 }
 
 void AShooterPlayerController::BeginPlay()
