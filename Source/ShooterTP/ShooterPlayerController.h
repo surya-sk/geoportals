@@ -93,6 +93,9 @@ public:
 	void LoadNextLevel();
 
 	UFUNCTION(BlueprintCallable)
+	void RestartGame();
+
+	UFUNCTION(BlueprintCallable)
 	void CloseExpositionText();
 
 	void ShowExpositionText();

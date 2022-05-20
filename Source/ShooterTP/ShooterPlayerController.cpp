@@ -110,6 +110,16 @@ void AShooterPlayerController::LoadNextLevel()
 	SwitchLevel();
 }
 
+void AShooterPlayerController::RestartGame()
+{
+	UShooterTPSaveGame* SaveGameInstance = Cast<UShooterTPSaveGame>(UGameplayStatics::CreateSaveGameObject(UShooterTPSaveGame::StaticClass()));
+	if (SaveGameInstance)
+	{
+		UGameplayStatics::DeleteGameInSlot(SaveGameInstance->PlayerName, SaveGameInstance->UserIndex);
+	}
+	LoadGame();
+}
+
 void AShooterPlayerController::CloseExpositionText()
 {
 	if (ExpositionText)
