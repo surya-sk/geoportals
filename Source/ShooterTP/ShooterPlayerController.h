@@ -62,9 +62,9 @@ private:
 
 	int32 CurrentLevelIndex;
 
-	FString Levels[7]{ "UEDPIE_0_Opening", "UEDPIE_0_Level1", "UEDPIE_0_Level2", "UEDPIE_0_Level3", "UEDPIE_0_Level4", "UEDPIE_0_Level5", "UEDPIE_0_Level6"};
+	FString Levels[8]{ "UEDPIE_0_Opening", "UEDPIE_0_Level1", "UEDPIE_0_Level2", "UEDPIE_0_Level3", "UEDPIE_0_Level4", "UEDPIE_0_Level5", "UEDPIE_0_Level6", "UEDPIE_0_Credits"};
 
-	FString LevelNames[7]{ "Opening", "Level1", "Level2", "Level3", "Level4", "Level5", "Level6"};
+	FString LevelNames[8]{ "Opening", "Level1", "Level2", "Level3", "Level4", "Level5", "Level6", "Credits"};
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Widgets, meta = (AllowPrivateAccess = "true"))
 	UUserWidget* GameOverMenu;

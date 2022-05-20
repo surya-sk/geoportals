@@ -1,0 +1,30 @@
+Gameplay Programming
+Surya K.
+
+Game & Level Design 
+Surya K.
+
+Main Character Asset
+Mixamo
+
+The following assets are from the Unreal Marketplace
+
+Level 1 Landscape
+Interactive Spruce Forest
+
+Level 2, 5 Landscape
+Elite Landscapes
+
+Level 3
+Rural Australia
+
+Level 4
+Winter Forest
+
+Level 6
+Infinity Blade Grasslands
+
+Enemies
+Paragon Assets From Infinity Blade
+
+Made with Unreal Engine 4 
