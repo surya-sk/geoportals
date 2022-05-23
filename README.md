@@ -3,6 +3,8 @@
 
 In the future where portals are used for transportation within the earth, a portal is accidentally opened to another world which brings dangerous alien creatures and a toxic substance polluting the atmosphere.
 
+** The game has been submitted to the Store, but hasn't been published as of writing this.**
+
 The game is availabe to download for free on Windows 10 and 11 devices.
 
 <a href='	https://www.microsoft.com/store/apps/9PD97FWSNDCR'><img src='https://developer.microsoft.com/en-us/store/badges/images/English_get-it-from-MS.png' alt='Store Link' height="50px"/></a>
