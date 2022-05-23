@@ -7,7 +7,12 @@ Surya K.
 Main Character Asset
 Mixamo
 
+Icon from http://www.flaticon.com/free-icon/sushi_187463#term=sushi&page=1&position=68
+
 The following assets are from the Unreal Marketplace
+
+Loading screen
+Async Loading Screen
 
 Level 1 Landscape
 Interactive Spruce Forest
@@ -26,5 +31,6 @@ Infinity Blade Grasslands
 
 Enemies
 Paragon Assets From Infinity Blade
+
 
 Made with Unreal Engine 4 
