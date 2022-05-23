@@ -8,7 +8,7 @@ The game is availabe to download for free on Windows 10 and 11 devices.
 <a href='	https://www.microsoft.com/store/apps/9PD97FWSNDCR'><img src='https://developer.microsoft.com/en-us/store/badges/images/English_get-it-from-MS.png' alt='Store Link' height="50px"/></a>
 
 ## Description
-Geoportals is a third-person shooter built using Unreal Engine 4. The gameplay involves shooting aliens, navigating the levels and finding portals. There are various enemy types, and each level has a different climate and atmosphere, each with different enemy variants and types. The game supports Xbox controller and keyboard + mouse for input out of the box. For in-depth documentation, refer to Documentation.pdf.
+Geoportals is a third-person shooter built using Unreal Engine 4. The gameplay involves shooting aliens, navigating the levels and finding portals. There are various enemy types, and each level has a different climate and atmosphere, each with different enemy variants and types. The game supports Xbox controller and keyboard + mouse for input out of the box. For in-depth documentation, refer to the <a href='Documentation.pdf'>documentation</a>.
 
 
 ## Plot
@@ -16,10 +16,10 @@ After accidentally opening a portal to another world, alien creatures occupy the
 
 ## Screenshots
 <table><tr>
-<td> <img src="Screenshots/1.png" alt="Drawing" style="width: 550px;"/> </td>
 <td> <img src="Screenshots/2.png" alt="Drawing" style="width: 550px;"/> </td>
 <td> <img src="Screenshots/3.png" alt="Drawing" style="width: 550px;"/> </td>
 <td> <img src="Screenshots/4.png" alt="Drawing" style="width: 550px;"/> </td>
+<td> <img src="Screenshots/5.png" alt="Drawing" style="width: 550px;"/> </td>
 </tr></table>
 
 ## Building
@@ -29,5 +29,5 @@ While this repository contains all of the source code, it does not contain a lot
 This project is licensed under the GNU General Public License 3.
 
 ## References 
-Please refer to the credits.txt file. 
+Please see the <a href='Credits.txt'>credits</a> file. 
   
